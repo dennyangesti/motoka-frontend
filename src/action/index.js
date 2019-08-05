@@ -5,46 +5,38 @@ import cookies from 'universal-cookie'
 
 const cookie = new cookies()
 
-export const onLoginUser = (user, pass) => {
+export const onLoginUser = (username, password) => {
    // Tembak data ke database
-   return (dispatch) => { // Dispatch adalah function
-      axios.get(
-         'http://localhost:2019/users',
-         {
-            params: {
-               username: user,
-               password: pass
-            }
-         }
+   return async (dispatch) => { // Dispatch adalah function
 
-      ).then(res => {
+      const res = await axios.post(`/users/login`, {
+         username, password
+      })
 
-         if (res.data.length > 0) {
+      try {
+         if (typeof (res.data) === 'string') {
+            console.log(res.data)
+         } else {
 
-            const { id, username } = res.data[0]
+            const { id, username, email, password, name, phone_number, gender, address, avatar } = res.data
+
+            // set cookie
+            cookie.set('userName', { id, username, email, password, name, phone_number, gender, address, avatar })
 
             dispatch({
-               type: "LOGIN_SUCCESS",
-               payload: { id, username }
-
-            })
-
-            // Membuat data untuk cookie
-            cookie.set('userName', { id, username }, { path: '/' })
-
-         } else {
-            alert('Username or Password not found')
-
+               type: 'LOGIN_SUCCESS',
+               payload: {
+                  id, username, email, password, name, phone_number, gender, address, avatar
+               }
+            });
          }
 
-         console.log(res)
-
-      }).catch(err => {
-         alert('Gagal Login')
+      } catch (err) {
          console.log(err)
-      })
+      }
    }
 }
+
 
 export const keepLogin = (objUser) => {
 

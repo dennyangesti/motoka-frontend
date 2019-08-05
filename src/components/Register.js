@@ -30,71 +30,71 @@ class Register extends Component {
 
       //GET, axios.get ; untuk mengambil data
 
-      axios.get(
+      // axios.get(
+      //    'http://localhost:2019/users',
+      //    {
+      //       params: {
+      //          username: user
+      //       }
+      //    }
+
+      // ).then((res) => {
+      //    // Jika username ditemukan, array.length > 0
+      //    if (res.data.length > 0) {
+      //       console.log("Username sudah digunakan")
+      //       alert('Username telah digunakan')
+
+      //    } else {
+      //       // Check data berdasarkan email
+      //       axios.get(
+      //          'http://localhost:2019/users',
+      //          {
+      //             params: {
+      //                email: email
+      //             }
+      //          }
+
+      //       ).then((res) => {
+      //          // Jika email ditemukan, array.length > 0
+      //          if (res.data.length > 0) {
+      //             console.log("Email sudah digunakan")
+      //             alert('Email telah digunakan')
+
+      //          } else {
+      //             // Jika username dan email tidak ditemukan
+      //             // Post untuk menaruh data baru
+      axios.post(
          'http://localhost:2019/users',
          {
-            params: {
-               username: user
-            }
+            first_name: firstName,
+            last_name: lastName,
+            username: user,
+            password: pass,
+            email: email,
+            phone_number: phone,
+            gender: gender,
+            address: address,
+            avatar: avatar
          }
 
       ).then((res) => {
-         // Jika username ditemukan, array.length > 0
-         if (res.data.length > 0) {
-            console.log("Username sudah digunakan")
-            alert('Username telah digunakan')
-
-         } else {
-            // Check data berdasarkan email
-            axios.get(
-               'http://localhost:2019/users',
-               {
-                  params: {
-                     email: email
-                  }
-               }
-
-            ).then((res) => {
-               // Jika email ditemukan, array.length > 0
-               if (res.data.length > 0) {
-                  console.log("Email sudah digunakan")
-                  alert('Email telah digunakan')
-
-               } else {
-                  // Jika username dan email tidak ditemukan
-                  // Post untuk menaruh data baru
-                  axios.post(
-                     'http://localhost:2019/users',
-                     {
-                        username: user,
-                        first_name: firstName,
-                        last_name: lastName,
-                        email: email,
-                        password: pass,
-                        phone_number: phone,
-                        gender: gender,
-                        address: address,
-                        avatar: avatar
-                     }
-
-                  ).then((res) => {
-                     alert('Account anda telah berhasil dibuat')
-                     console.log("Data Berhasil Ditangkap")
-                     console.log(res)
-
-                  }).catch((err) => {
-                     console.log("Data Gagal Ditangkap")
-                     console.log(err)
-
-                  })
-               }
-            })
-         }
+         alert('Account anda telah berhasil dibuat')
+         console.log("Data Berhasil Ditangkap")
+         console.log(res)
 
       }).catch((err) => {
-         console.log("Gagal Request");
-         console.log(err);
+         console.log("Data Gagal Ditangkap")
+         console.log(err)
+
       })
+      //          }
+      //       })
+      //    }
+
+      // }).catch((err) => {
+      //    console.log("Gagal Request");
+      //    console.log(err);
+      // })
    }
 
    render() {

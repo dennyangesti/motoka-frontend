@@ -104,79 +104,52 @@ class Header extends Component {
 
       // Render setelah login
       return (
-         <h1>hello World</h1>
-         // <div className='fixed-top'>
-         //    <Navbar color="light" light expand="md">
-         //       <NavbarBrand href="/" className="mr-5"> <img
-         //          src={mustache}
-         //          height={'30px'}
-         //          alt='' /> germ-o
-         //       </NavbarBrand>
-         //       <NavbarToggler onClick={this.toggle} />
-         //       <InputGroup>
-         //          <Input />
-         //          <InputGroupAddon addonType="append">
-         //             <Button color="secondary" className="mr-5">
-         //                <img src={search} height={'20px'} />
-         //             </Button>
-         //          </InputGroupAddon>
-         //       </InputGroup>
-         //       <Collapse isOpen={this.state.isOpen} navbar>
-         //          <Nav className="ml-auto" navbar>
+         <div className='d-inline-flex'>
+               <nav className="navbar navbar-expand-lg text-white fixed-top" style={{ backgroundColor: 'black' }}>
+                  <div className="container text-uppercase">
+                     <Link to='/'><h1 className="navbar-brand text-danger font-weight-bold">GET<span className='text-white font-weight-normal'>Motoka</span></h1></Link>
+                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                     </button>
+                     <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
+                        <ul className="navbar-nav">
+                           <li className="nav-item active">
+                              <Link to='/'><p className="nav-link text-danger">Home</p></Link>
+                           </li>
+                           <UncontrolledDropdown setActiveFromChild className>
+                              <DropdownToggle tag="a" className="nav-link" caret>
+                                 Shop
+                           </DropdownToggle>
+                              <DropdownMenu>
+                                 <Link to='/category'><DropdownItem>Car</DropdownItem></Link>
+                                 <Link to='/category'><DropdownItem>Motorcycle</DropdownItem></Link>
+                                 <Link to='/category'><DropdownItem>Accessories</DropdownItem></Link>
+                                 <Link to='/category'><DropdownItem>Apparel</DropdownItem></Link>
+                              </DropdownMenu>
+                           </UncontrolledDropdown>
+                           <li className="nav-item">
+                              <Link to='/brand'><p className="nav-link text-white">Brand</p></Link>
+                           </li>
+                           <Link to='/about'><li className="nav-item">
+                              <p className="nav-link text-white">About</p>
+                           </li></Link>
+                        </ul>
+                     </div>
+                     <UncontrolledDropdown setActiveFromChild>
+                        <DropdownToggle tag='a' className="nav-link bg-transparent" caret>
+                           Hello, {this.props.user.username}
+                        </DropdownToggle>
+                        <DropdownMenu>
+                           <DropdownItem  className="nav-item btn-success"
+                                 onClick={this.onButtonClick}>
+                                 Logout
+                           </DropdownItem>
+                        </DropdownMenu>
+                     </UncontrolledDropdown>
 
-         //             <NavItem className='mt-2 mr-4'>
-         //                <Link to='/' >
-         //                   <img
-         //                      src={bag}
-         //                      height={'30px'}
-         //                      alt='' />
-         //                </Link>
-         //             </NavItem>
-
-         //             <NavItem className='mt-2 mr-4'>
-         //                <Link to='/manageproduct'>
-         //                   <img
-         //                      src={setting}
-         //                      height={'30px'}
-         //                      alt='' />
-         //                </Link>
-         //             </NavItem>
-
-         //             <NavItem className='mt-2 mr-4'>
-         //                <Link to='/cart'> <img
-         //                   src={cart}
-         //                   height={'30px'}
-         //                   alt='' />
-         //                </Link>
-         //             </NavItem>
-
-         //             <UncontrolledDropdown nav inNavbar>
-         //                <DropdownToggle nav caret>
-         //                   Hello, {this.props.user.username}
-         //                   <img
-         //                      src={account}
-         //                      height={'30px'}
-         //                      alt='' />
-         //                </DropdownToggle>
-         //                <DropdownMenu right>
-         //                   <DropdownItem>
-         //                      <Button
-         //                         className="dropdown-item"
-         //                         onClick={this.onButtonClick}>
-         //                         Logout  <img
-         //                            src={logout}
-         //                            height={'23px'}
-         //                            alt='' />
-         //                      </Button>
-
-         //                   </DropdownItem>
-         //                </DropdownMenu>
-         //             </UncontrolledDropdown>
-
-         //          </Nav>
-         //       </Collapse>
-         //    </Navbar>
-         // </div>
+                  </div>
+               </nav>
+            </div>
       )
    }
 }
