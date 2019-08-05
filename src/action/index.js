@@ -7,33 +7,24 @@ const cookie = new cookies()
 
 export const onLoginUser = (username, password) => {
    // Tembak data ke database
-   return async (dispatch) => { // Dispatch adalah function
+   return (dispatch) => { // Dispatch adalah function
 
-      const res = await axios.post(`/users/login`, {
+      axios.post(`/users/login`, {
          username, password
-      })
 
-      try {
-         if (typeof (res.data) === 'string') {
-            console.log(res.data)
-         } else {
+      }).then(res => {
+         const { id, username } = res.data
 
-            const { id, username, email, password, name, phone_number, gender, address, avatar } = res.data
-
-            // set cookie
-            cookie.set('userName', { id, username, email, password, name, phone_number, gender, address, avatar })
-
-            dispatch({
+         dispatch(
+            {
                type: 'LOGIN_SUCCESS',
                payload: {
-                  id, username, email, password, name, phone_number, gender, address, avatar
+                  id, username
                }
-            });
-         }
-
-      } catch (err) {
-         console.log(err)
-      }
+            }
+         )
+         cookie.set('userName', { id, username }, { path: '/' })
+      })
    }
 }
 
