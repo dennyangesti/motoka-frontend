@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import cookies from 'universal-cookie'
 
 import { onLoginUser } from '../action'
 
-const cookie = new cookies()
 
 class Login extends Component {
 
