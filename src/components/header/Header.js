@@ -2,24 +2,13 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { onLogoutUser } from '../action'
+import { logoutUser } from '../../action'
 
 import {
-   Button,
-   Collapse,
-   Navbar,
-   NavbarToggler,
-   NavbarBrand,
-   Nav,
-   NavItem,
    UncontrolledDropdown,
    DropdownToggle,
    DropdownMenu,
-   DropdownItem,
-   ButtonDropdown,
-   InputGroup,
-   InputGroupAddon,
-   Input
+   DropdownItem
 } from 'reactstrap';
 
 
@@ -43,7 +32,7 @@ class Header extends Component {
 
    onButtonClick = () => {
       // Menghapus username dari redux state
-      this.props.onLogoutUser()
+      this.props.logoutUser()
    }
 
    render() {
@@ -161,4 +150,4 @@ const mapStateToProps = state => {
    }
 }
 
-export default connect(mapStateToProps, { onLogoutUser })(Header)
+export default connect(mapStateToProps, { logoutUser })(Header)

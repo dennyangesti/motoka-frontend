@@ -110,7 +110,7 @@ class Register extends Component {
                      </div>
 
                      <form>
-                        <label for='form-control'>Name:</label>
+                        <label htmlFor='form-control'>Name:</label>
                         <div className="input-group">
                            <input type="text" aria-label="First name" className="form-control" placeholder='First Name' ref={(firstName) => { this.firstName = firstName }} />
                            <input type="text" aria-label="Last name" className="form-control" placeholder='Last Name' ref={(lastName) => { this.lastName = lastName }} />
@@ -119,21 +119,21 @@ class Register extends Component {
 
                         {/* <form> */}
                         <div className="form-group mt-2">
-                           <label for="inputUsername">Username:</label>
+                           <label htmlFor="inputUsername">Username:</label>
                            <input type="text" className="form-control" id="inputUsername" placeholder="Enter Username" ref={(user) => { this.username = user }} />
                         </div>
                         {/* </form> */}
 
                         {/* <form> */}
                         <div className="form-group">
-                           <label for="exampleInputEmail1">Email:</label>
+                           <label htmlFor="exampleInputEmail1">Email:</label>
                            <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter Email" ref={(email) => { this.email = email }} />
                            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         {/* </form> */}
 
                         {/* <form> */}
-                        <label for='form-control'>Password:</label>
+                        <label htmlFor='form-control'>Password:</label>
                         <div className="input-group">
                            <input type="password" aria-label="Password" className="form-control" placeholder='Enter Password' ref={(pass) => { this.password = pass }} />
                            <input type="password" aria-label="Confirm Password" className="form-control" placeholder='Confirm Password' ref={(confirmPass) => { this.confirmPassword = confirmPass }} />
@@ -143,8 +143,8 @@ class Register extends Component {
 
                         {/* <form> */}
                         <label className='mt-2'>Gender:</label>
-                        <div class="input-group mb-3">
-                           <select class="custom-select" ref={(gender) => { this.gender = gender }} id="inputGroupSelect02">
+                        <div className="input-group mb-3">
+                           <select className="custom-select" ref={(gender) => { this.gender = gender }} id="inputGroupSelect02">
                               <option value="male">Male</option>
                               <option value="female">Female</option>
                            </select>
@@ -152,26 +152,26 @@ class Register extends Component {
                         {/* </form> */}
 
                         {/* <form> */}
-                        <div class="form-group">
-                           <label for="address">Address:</label>
-                           <textarea class="form-control" id="address" rows="3" placeholder='Enter Address' ref={(address) => { this.address = address }}></textarea>
+                        <div className="form-group">
+                           <label htmlFor="address">Address:</label>
+                           <textarea className="form-control" id="address" rows="3" placeholder='Enter Address' ref={(address) => { this.address = address }}></textarea>
                         </div>
                         {/* </form> */}
 
                         {/* <form> */}
                         <label>Phone number:</label>
-                        <div class="input-group mb-3">
-                           <div class="input-group-prepend">
-                              <span class="input-group-text" id="phonenumber">+62</span>
+                        <div className="input-group mb-3">
+                           <div className="input-group-prepend">
+                              <span className="input-group-text" id="phonenumber">+62</span>
                            </div>
-                           <input type="text" class="form-control" placeholder="Enter phone number" ref={(phone) => { this.phone = phone }} />
+                           <input type="text" className="form-control" placeholder="Enter phone number" ref={(phone) => { this.phone = phone }} />
                         </div>
                         {/* </form> */}
 
                         {/* <form> */}
-                        <div class="form-group mt-3">
-                           <label for="avatar">Avatar:</label>
-                           <input type="file" class="form-control-file" id="avatar" ref={(photo) => { this.avatar = photo }} />
+                        <div className="form-group mt-3">
+                           <label htmlFor="avatar">Avatar:</label>
+                           <input type="file" className="form-control-file" id="avatar" ref={(photo) => { this.avatar = photo }} />
                         </div>
                      </form>
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { onLoginUser } from '../action'
+import { loginUser } from '../../action'
 
 
 class Login extends Component {
@@ -15,7 +15,7 @@ class Login extends Component {
       var pass = this.password.value
 
       // Tembak data ke database
-      this.props.onLoginUser(user, pass)
+      this.props.loginUser(user, pass)
 
    }
 
@@ -85,4 +85,4 @@ const mapStateToProps = state => {
    }
 }
 
-export default connect(mapStateToProps, { onLoginUser })(Login)
+export default connect(mapStateToProps, { loginUser })(Login)

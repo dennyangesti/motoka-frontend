@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Route, Link } from 'react-router-dom'
 
-import BrandCar from './BrandCar'
-import BrandMoto from './BrandMoto'
+import BrandCar from '../home/BrandCar'
+import BrandMoto from '../home/BrandMoto'
 
 class Brand extends Component {
 

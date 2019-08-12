@@ -76,7 +76,7 @@ class ManageProduct extends Component {
                   <td>{item.desc}</td>
                   <td>IDR {item.price.toLocaleString('IN')}</td>
                   <td>
-                     <img className='list' src={item.src} />
+                     <img className='list' src={item.src} alt='' />
                   </td>
                   <td>
                      <button onClick={() => { this.setState({ selectedId: item.id }) }} className='btn btn-primary'>Edit</button>
@@ -99,7 +99,7 @@ class ManageProduct extends Component {
                      <input className="form-control" ref={input => { this.editPrice = input }} type="text" defaultValue={item.price} />
                   </td>
                   <td>
-                     <img className='list' src={item.src} />
+                     <img className='list' src={item.src} alt='' />
                   </td>
                   <td>
                      <button onClick={() => { this.onSaveItem(item.id) }} className='btn btn-primary'>Save</button>

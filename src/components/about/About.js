@@ -10,7 +10,7 @@ class About extends Component {
          <div>
             <div className='' style={{ marginTop: '50px', backgroundColor: 'black' }}>
                <div className='container justify-content-center d-flex'>
-                  <img className='img-fluid' src={require('../image/logo/motoka1.png')} width='150' />
+                  <img className='img-fluid' src={require('../../image/logo/motoka1.png')} width='150' alt='' />
                </div>
             </div>
             <div className='container'>

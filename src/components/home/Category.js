@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {
-   Card, CardImg, CardText, CardBody,
-   CardTitle, Button
-} from 'reactstrap';
 
 class Category extends Component {
    componentDidMount() {
@@ -38,12 +34,18 @@ class Category extends Component {
                               <div className="card-title mt-1">
                                  <h4>Name</h4>
                               </div>
-                              <form onSubmit={enter => this.onEnter(enter)} className="input-group"><input ref={input => this.name = input} className="form-control" type="text" /></form>
+                              <form onSubmit={enter => this.onEnter(enter)} className="input-group">
+                                 <input ref={input => this.name = input} className="form-control" type="text" />
+                              </form>
                               <div className="card-title mt-1">
                                  <h4>Price</h4>
                               </div>
-                              <form onSubmit={enter => this.onEnter(enter)} className="input-group"><input placeholder="Minimum Price" type="text" ref={input => this.min = input} className="form-control mb-2" type="text" /></form>
-                              <form onSubmit={enter => this.onEnter(enter)} className="input-group"><input placeholder="Maximum Price" type="text" ref={input => this.max = input} className="form-control" type="text" /></form>
+                              <form onSubmit={enter => this.onEnter(enter)} className="input-group">
+                                 <input placeholder="Minimum Price" type="text" ref={input => this.min = input} className="form-control mb-2" />
+                              </form>
+                              <form onSubmit={enter => this.onEnter(enter)} className="input-group">
+                                 <input placeholder="Maximum Price" type="text" ref={input => this.max = input} className="form-control" />
+                              </form>
                               <button onClick={this.onBtnSearch} className="btn btn-outline-secondary btn-block mt-5">Search</button>
                            </div>
                         </div>
