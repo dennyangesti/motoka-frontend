@@ -12,40 +12,35 @@ const cookie = new cookies()
 // ------------------------------------
 
 // USER REGISTER START
-export const registerUser = (firstName, lastName, username, email, password, confirmPass, gender, phoneNumber) => {
-   if (password === confirmPass) {
-      axios.post(`/register`,
-         {
-            first_name: firstName,
-            last_name: lastName,
-            username: username,
-            email: email,
-            password: password,
-            gender: gender,
-            phone_number: phoneNumber
-         }
-      ).then(res => {
-         if (typeof (res.data) === 'string') {
-            Swal.fire({
-               type: `error`,
-               title: `Error 404`,
-               text: res.data
-            })
-         } else {
-            Swal.fire(
-               `Your account has been successfully created`,
-               `Kindly check your email for verification`,
-               `success`
-            )
-         }
-      })
-   } else {
-      Swal.fire({
-         type: `error`,
-         title: `Invalid, password doesn't match`,
-         text: `Password and confirm password must be same`
-      })
-   }
+export const registerUser = (firstName, lastName, username, email, password, confirmPass, gender, address, phoneNumber) => {
+
+   axios.post(`/register`,
+      {
+         first_name: firstName,
+         last_name: lastName,
+         username: username,
+         email: email,
+         password: password,
+         gender: gender,
+         address: address,
+         phone_number: phoneNumber
+      }
+   ).then(res => {
+      if (typeof (res.data) === 'string') {
+         Swal.fire({
+            type: `error`,
+            title: `Error 404`,
+            text: res.data
+         })
+      } else {
+         Swal.fire(
+            `Your account has been successfully created`,
+            `Kindly check your email for verification`,
+            `success`
+         )
+      }
+   })
+
 }
 // USER REGISTER END
 
