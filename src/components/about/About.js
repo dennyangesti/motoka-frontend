@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+import Header from '../header/Header'
+import Footer from '../Footer'
+
 class About extends Component {
    componentDidMount() {
       window.scrollTo(0, 0);
@@ -8,6 +11,7 @@ class About extends Component {
    render() {
       return (
          <div>
+            <Header />
             <div className='' style={{ marginTop: '50px', backgroundColor: 'black' }}>
                <div className='container justify-content-center d-flex'>
                   <img className='img-fluid' src={require('../../image/logo/motoka1.png')} width='150' alt='' />
@@ -32,6 +36,7 @@ class About extends Component {
                   </div>
                </div>
             </div>
+            <Footer />
          </div>
       )
    }

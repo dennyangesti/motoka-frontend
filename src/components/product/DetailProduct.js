@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+import Header from '../header/Header'
+import Footer from '../Footer'
+
 class DetailProduct extends Component {
 
    state = {
@@ -45,11 +48,13 @@ class DetailProduct extends Component {
          //    </div>
          // </div>
          <div>
+            <Header />
             <div className='card col-6 ml-3 mb-3 border-0' style={{ marginTop: '60px' }}>
                <img className='card-img-top' src={"http://www.hdcarwallpapers.com/thumbs/2018/mclaren_720s_pacific_theme_2018_4k_8k-t2.jpg"} alt='' />
             </div>
             <div>
             </div>
+            <Footer />
          </div>
       )
    }

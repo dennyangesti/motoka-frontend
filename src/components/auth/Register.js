@@ -1,12 +1,25 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import axios from '../../config/axios'
+import { connect } from 'react-redux'
+import Swal from 'sweetalert2'
 
-import { registerUser } from '../../action';
+import Header from '../header/Header'
+import Footer from '../Footer'
 
 
 class Register extends Component {
 
-   onButtonClick = () => {
+   state = {
+      register: false
+   }
+
+   onEnter = (action) => {
+      action.preventDefault()
+      this.onButtonClick()
+   }
+
+   onButtonClick = async () => {
 
       const firstName = this.firstName.value
       const lastName = this.lastName.value
@@ -14,120 +27,142 @@ class Register extends Component {
       const email = this.email.value
       const password = this.password.value
       const confirmPass = this.confirmPass.value
-      const gender = this.gender.value
-      const address = this.address.value
-      const phoneNumber = this.phone.value
-      const avatar = this.avatar.value
 
-      // console.log(firstName)
-      // console.log(lastName)
-      // console.log(username)
+      console.log(firstName)
+      console.log(lastName)
+      console.log(username)
       console.log(email)
       console.log(password)
       console.log(confirmPass)
-      // console.log(gender)
-      // console.log(address)
-      // console.log(phoneNumber)
-      // console.log(avatar)
-      if (password === confirmPass) {
-         registerUser(firstName, lastName, username, email, gender, phoneNumber, password, confirmPass)
+
+      if (password !== confirmPass) {
+         return (
+            Swal.fire({
+               type: 'error',
+               title: 'Invalid, Password not match!',
+               text: 'Password and Confirm Password must be the same',
+            })
+         )
       }
 
+      try {
+         const res = await axios.post('/register',
+            {
+               first_name: firstName,
+               last_name: lastName,
+               username: username,
+               email: email,
+               password: password
+            })
 
+         if (typeof (res.data) === 'string') {
+            return (
+               Swal.fire({
+                  type: 'error',
+                  title: 'Error 404',
+                  text: res.data
+               })
+            )
+         }
+
+         if (typeof (res.data) === 'object') {
+            Swal.fire(
+               'Registration Success!',
+               'Your account has been created',
+               'success'
+            )
+
+            this.setState({ register: true })
+         }
+      } catch (err) {
+         console.log(err)
+         alert(err)
+      }
    }
 
    render() {
-      return (
-         <div style={{ backgroundImage: "url(http://www.hdcarwallpapers.com/walls/ford_gt_mk_ii_2019_5k_2-HD.jpg)", backgroundSize: 'cover', backgroundPosition: '65%' }}>
-            <div className='mb-0 row' style={{ marginTop: "48px" }}>
-               <div className='col-sm-8 mx-auto card mt-5 mb-5 shadow-lg' style={{ opacity: '0.9' }}>
-                  <div className='card-body '>
+      // Logged user, cannot access Register Page
+      if (this.props.user.username !== '') {
+         return <Redirect to='/' />
+      }
 
-                     <div className=' border-bottom border-secondary card-title'>
-                        <h1>Personal Registration</h1>
-                     </div>
+      // Registered user, redirect to Login Page
+      if (this.state.register === true) {
+         return <Redirect to='/login' />
+      }
 
-                     <form>
-                        <label htmlFor='form-control'>Name:</label>
-                        <div className="input-group">
-                           <input type="text" aria-label="First name" className="form-control" placeholder='First Name' ref={(firstName) => { this.firstName = firstName }} />
-                           <input type="text" aria-label="Last name" className="form-control" placeholder='Last Name' ref={(lastName) => { this.lastName = lastName }} />
-                        </div>
-                        {/* </form> */}
+      if (this.state.register === false || this.props.user.username === '') {
+         return (
+            <div>
+               <Header />
+               <div style={{ backgroundImage: "url(http://www.hdcarwallpapers.com/walls/ford_gt_mk_ii_2019_5k_2-HD.jpg)", backgroundSize: 'cover', backgroundPosition: '65%' }}>
+                  <div className='mb-0 row' style={{ marginTop: "48px" }}>
+                     <div className='col-sm-8 mx-auto card mt-5 mb-5 shadow-lg' style={{ opacity: '0.9' }}>
+                        <div className='card-body '>
 
-                        {/* <form> */}
-                        <div className="form-group mt-2">
-                           <label htmlFor="inputUsername">Username:</label>
-                           <input type="text" className="form-control" id="inputUsername" placeholder="Enter Username" ref={(user) => { this.username = user }} />
-                        </div>
-                        {/* </form> */}
-
-                        {/* <form> */}
-                        <div className="form-group">
-                           <label htmlFor="exampleInputEmail1">Email:</label>
-                           <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter Email" ref={(email) => { this.email = email }} />
-                           <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        {/* </form> */}
-
-                        {/* <form> */}
-                        <label htmlFor='form-control'>Password:</label>
-                        <div className="input-group">
-                           <input type="password" aria-label="Password" className="form-control" placeholder='Enter Password' ref={(password) => { this.password = password }} />
-                           <input type="password" aria-label="Confirm Password" className="form-control" placeholder='Confirm Password' ref={(confirmpass) => { this.confirmPass = confirmpass }} />
-                        </div>
-                        <small id="passwordHelp" className="form-text text-muted">Please remember your own password and do not share to anyone else.</small>
-                        {/* </form> */}
-
-                        {/* <form> */}
-                        <label className='mt-2'>Gender:</label>
-                        <div className="input-group mb-3">
-                           <select className="custom-select" ref={(gender) => { this.gender = gender }} id="inputGroupSelect02">
-                              <option value="Male">Male</option>
-                              <option value="Female">Female</option>
-                           </select>
-                        </div>
-                        {/* </form> */}
-
-                        {/* <form> */}
-                        <div className="form-group">
-                           <label htmlFor="address">Address:</label>
-                           <textarea className="form-control" id="address" rows="3" placeholder='Enter Address' ref={(address) => { this.address = address }}></textarea>
-                        </div>
-                        {/* </form> */}
-
-                        {/* <form> */}
-                        <label>Phone number:</label>
-                        <div className="input-group mb-3">
-                           <div className="input-group-prepend">
-                              <span className="input-group-text" id="phonenumber">+62</span>
+                           <div className=' border-bottom border-secondary card-title'>
+                              <h1>Personal Registration</h1>
                            </div>
-                           <input type="text" className="form-control" placeholder="Enter phone number" ref={(phone) => { this.phone = phone }} />
+
+                           <form onSubmit={this.onEnter}>
+                              <label htmlFor='form-control'>Name:</label>
+                              <div className="input-group">
+                                 <input type="text" aria-label="First name" className="form-control" placeholder='First Name' ref={(firstName) => { this.firstName = firstName }} />
+                                 <input type="text" aria-label="Last name" className="form-control" placeholder='Last Name' ref={(lastName) => { this.lastName = lastName }} />
+                              </div>
+                              {/* </form> */}
+
+                              {/* <form> */}
+                              <div className="form-group mt-2">
+                                 <label htmlFor="inputUsername">Username:</label>
+                                 <input type="text" className="form-control" id="inputUsername" placeholder="Enter Username" ref={(user) => { this.username = user }} />
+                              </div>
+                              {/* </form> */}
+
+                              {/* <form> */}
+                              <div className="form-group">
+                                 <label htmlFor="exampleInputEmail1">Email:</label>
+                                 <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter Email" ref={(email) => { this.email = email }} />
+                                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                              </div>
+                              {/* </form> */}
+
+                              {/* <form> */}
+                              <label htmlFor='form-control'>Password:</label>
+                              <div className="input-group">
+                                 <input type="password" aria-label="Password" className="form-control" placeholder='Enter Password' ref={(password) => { this.password = password }} />
+                                 <input type="password" aria-label="Confirm Password" className="form-control" placeholder='Confirm Password' ref={(confirmpass) => { this.confirmPass = confirmpass }} />
+                              </div>
+                              <small id="passwordHelp" className="form-text text-muted">Please remember your own password and do not share to anyone else.</small>
+                              {/* </form> */}
+
+                           </form>
+
+                           <div className='d-flex justify-content-start my-3 mt-5'>
+                              <button onClick={this.onButtonClick} className='btn btn-danger'>Register</button>
+                           </div>
+
+                           <div className="mt-5 text-right">
+                              <p>Already have an account? <br /><Link to="/login"> Login here!</Link></p>
+                           </div>
+
                         </div>
-                        {/* </form> */}
-
-                        {/* <form> */}
-                        <div className="form-group mt-3">
-                           <label htmlFor="avatar">Avatar:</label>
-                           <input type="file" className="form-control-file" id="avatar" ref={(photo) => { this.avatar = photo }} />
-                        </div>
-                     </form>
-
-                     <div className='d-flex justify-content-start my-3 mt-5'>
-                        <button onClick={this.onButtonClick} className='btn btn-danger'>Register</button>
                      </div>
-
-                     <div className="mt-5 text-right">
-                        <p>Already have an account? <br /><Link to="/login"> Login here!</Link></p>
-                     </div>
-
                   </div>
-               </div>
+               </div >
+               <Footer />
             </div>
-         </div >
-      )
+         )
+      }
+
    }
 }
 
-export default Register
+const mapStateToProps = state => {
+   return {
+      user: state.auth
+   }
+}
+
+export default connect(mapStateToProps)(Register)
 

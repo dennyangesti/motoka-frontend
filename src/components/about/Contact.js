@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+import Header from '../header/Header'
+import Footer from '../Footer'
+
 class Contact extends Component {
    componentDidMount() {
       window.scrollTo(0, 0);
@@ -7,8 +10,12 @@ class Contact extends Component {
    render() {
 
       return (
-         <div style={{ marginTop: '50px' }}>
-            <h1>Contact</h1>
+         <div>
+            <Header />
+            <div style={{ marginTop: '25px' }}>
+               <h1>Contact</h1>
+            </div>
+            <Footer />
          </div>
       )
    }

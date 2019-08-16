@@ -37,16 +37,6 @@ class Header extends Component {
 
    render() {
 
-      // const search = require('../../src/image/search.png');
-      // const setting = require('../../src/image/setting.png');
-      // const account = require('../../src/image/account.png');
-      // const bag = require('../../src/image/bag.png');
-      // const cart = require('../../src/image/cart.png');
-      // const mustache = require('../../src/image/mustache.png');
-      // const logout = require('../../src/image/logout.png');
-
-
-
       // Render sebelum login
       if (this.props.user.username === '') {
          
@@ -63,17 +53,9 @@ class Header extends Component {
                            <li className="nav-item active">
                               <Link to='/'><p className="nav-link text-danger">Home</p></Link>
                            </li>
-                           <UncontrolledDropdown setActiveFromChild>
-                              <DropdownToggle tag="a" className="nav-link" caret>
-                                 Shop
-                           </DropdownToggle>
-                              <DropdownMenu>
-                                 <Link to='/category'><DropdownItem>Car</DropdownItem></Link>
-                                 <Link to='/category'><DropdownItem>Motorcycle</DropdownItem></Link>
-                                 <Link to='/category'><DropdownItem>Accessories</DropdownItem></Link>
-                                 <Link to='/category'><DropdownItem>Apparel</DropdownItem></Link>
-                              </DropdownMenu>
-                           </UncontrolledDropdown>
+                           <li className="nav-item">
+                              <Link to='/category'><p className="nav-link text-white">Shop</p></Link>
+                           </li>
                            <li className="nav-item">
                               <Link to='/brand'><p className="nav-link text-white">Brand</p></Link>
                            </li>
@@ -103,19 +85,11 @@ class Header extends Component {
                      <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
                         <ul className="navbar-nav">
                            <li className="nav-item active">
-                              <Link to='/'><p className="nav-link text-danger">Home</p></Link>
+                              <Link to='/'><p className="nav-link text-white">Home</p></Link>
                            </li>
-                           <UncontrolledDropdown setActiveFromChild className>
-                              <DropdownToggle tag="a" className="nav-link" caret>
-                                 Shop
-                           </DropdownToggle>
-                              <DropdownMenu>
-                                 <Link to='/category'><DropdownItem>Car</DropdownItem></Link>
-                                 <Link to='/category'><DropdownItem>Motorcycle</DropdownItem></Link>
-                                 <Link to='/category'><DropdownItem>Accessories</DropdownItem></Link>
-                                 <Link to='/category'><DropdownItem>Apparel</DropdownItem></Link>
-                              </DropdownMenu>
-                           </UncontrolledDropdown>
+                           <li className="nav-item">
+                              <Link to='/category'><p className="nav-link text-white">Shop</p></Link>
+                           </li>
                            <li className="nav-item">
                               <Link to='/brand'><p className="nav-link text-white">Brand</p></Link>
                            </li>
@@ -124,12 +98,15 @@ class Header extends Component {
                            </li></Link>
                         </ul>
                      </div>
-                     <UncontrolledDropdown setActiveFromChild>
+                     <UncontrolledDropdown setActiveFromChild >
                         <DropdownToggle tag='a' className="nav-link bg-transparent" caret>
                            Hello, {this.props.user.username}
                         </DropdownToggle>
                         <DropdownMenu>
-                           <DropdownItem  className="nav-item btn-success"
+                           <DropdownItem tag='a' href='/profile' className="nav-item btn-outline-dark text-capitalize">
+                                 Edit Profile
+                           </DropdownItem>
+                           <DropdownItem  className="nav-item btn-dark"
                                  onClick={this.onButtonClick}>
                                  Logout
                            </DropdownItem>

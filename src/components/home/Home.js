@@ -8,6 +8,9 @@ import BrandMoto from '../home/BrandMoto';
 import MainCarousel from './MainCarousel';
 import Subscribe from '../home/Subcribe'
 
+import Header from '../header/Header'
+import Footer from '../Footer'
+
 
 class Home extends Component {
    state = {
@@ -79,12 +82,15 @@ class Home extends Component {
 
    render() {
       return (
-         <div style={{ marginTop: '50px' }}>
-            <MainCarousel />
-            <BrandCar />
-            <Category />
-            <BrandMoto />
-            <Subscribe />
+         <div>
+            <Header />
+            <div style={{ marginTop: '50px' }}>
+               <MainCarousel />
+               <BrandCar />
+               <BrandMoto />
+               <Subscribe />
+            </div>
+            <Footer />
          </div>
       );
    }

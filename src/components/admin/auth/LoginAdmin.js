@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { loginUser } from '../../action'
-import Header from '../header/Header'
-import Footer from '../Footer'
+import { loginAdmin } from '../../../action'
+import HeaderAdmin from '../HeaderAdmin'
 
 
-class Login extends Component {
+class LoginAdmin extends Component {
 
    onEnter = (action) => {
       action.preventDefault()
@@ -19,20 +18,20 @@ class Login extends Component {
    onButtonClick = () => {
       // Ambil data di text input
       // username dan password
-      var user = this.username.value
-      var pass = this.password.value
+      var username = this.username.value
+      var password = this.password.value
 
       // Tembak data ke database
-      this.props.loginUser(user, pass)
-
+      this.props.loginAdmin(username, password)
+      console.log(this.props.loginAdmin)
    }
 
    render() {
 
-      if (this.props.user.username === '') {
+      if (this.props.admin.username === '') {
          return (
             <div>
-               <Header />
+               <HeaderAdmin />
                <div className='mb-2 row' style={{ marginTop: "70px" }}>
                   <div className='col-sm-4 mx-auto card' style={{ backgroundColor: '' }}>
                      <div className='card-body'>
@@ -69,29 +68,24 @@ class Login extends Component {
                            <button onClick={this.onButtonClick} className='btn btn-warning'>Login</button>
                         </div>
 
-                        <div className="mt-5">
-                           <p>New member? <br /><Link to="/register"> Create an Account here!</Link></p>
-                        </div>
-
                      </div>
                   </div>
                </div>
-               <Footer />
             </div>
          )
 
       }
 
       // Arahkan user yang telah login ke home
-      return <Redirect to='/' />
+      return <Redirect to='/admin' />
 
    }
 }
 
 const mapStateToProps = state => {
    return {
-      user: state.auth // {id, username}
+      admin: state.admin_auth // {id, username}
    }
 }
 
-export default connect(mapStateToProps, { loginUser })(Login)
+export default connect(mapStateToProps, { loginAdmin })(LoginAdmin)

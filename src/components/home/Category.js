@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+import Header from '../header/Header'
+import Footer from '../Footer'
+
 class Category extends Component {
    componentDidMount() {
       window.scrollTo(0, 0);
@@ -8,7 +11,7 @@ class Category extends Component {
 
    renderList = () => {
       return (
-         <div className="card col-3 border-0 img-thumbnail text-center" style={{ marginTop: '60px' }}>
+         <div className="card col-3 border-0 img-thumbnail text-center" style={{ marginTop: '80px' }}>
             <Link to='/detailproduct'><img src={"http://www.hdcarwallpapers.com/thumbs/2018/mclaren_720s_pacific_theme_2018_4k_8k-t2.jpg"} className='card-img-top w-100' alt='' /></Link>
             <div className='card-body'>
                <h5 className='card-title'>McLaren</h5>
@@ -22,10 +25,11 @@ class Category extends Component {
    render() {
       return (
          <div>
-            <div className='ml-3 sticky-top'>
+            <Header />
+            <div className='ml-3'>
                <div className="row" >
                   <div className="col">
-                     <div className='mb-5' style={{ marginTop: '60px' }}>
+                     <div className='mb-5' style={{ marginTop: '80px' }}>
                         <div className="mx-auto card">
                            <div className="card-body">
                               <div className="border-bottom border-secondary card-title">
@@ -56,6 +60,7 @@ class Category extends Component {
                   </div>
                </div>
             </div>
+            <Footer />
          </div>
       )
    }

@@ -11,38 +11,6 @@ const cookie = new cookies()
 // --------------START-----------------
 // ------------------------------------
 
-// USER REGISTER START
-export const registerUser = (firstName, lastName, username, email, password, confirmPass, gender, address, phoneNumber) => {
-
-   axios.post(`/register`,
-      {
-         first_name: firstName,
-         last_name: lastName,
-         username: username,
-         email: email,
-         password: password,
-         gender: gender,
-         address: address,
-         phone_number: phoneNumber
-      }
-   ).then(res => {
-      if (typeof (res.data) === 'string') {
-         Swal.fire({
-            type: `error`,
-            title: `Error 404`,
-            text: res.data
-         })
-      } else {
-         Swal.fire(
-            `Your account has been successfully created`,
-            `Kindly check your email for verification`,
-            `success`
-         )
-      }
-   })
-
-}
-// USER REGISTER END
 
 // USER LOGIN START
 export const loginUser = (username, password) => {
@@ -88,24 +56,14 @@ export const loginUser = (username, password) => {
       })
    }
 }
-// USER LOGIN END
 
 // USER KEEP LOGIN START
 export const keepLogin = (objUser) => {
-
-   // objUser = {id, username}
    return {
       type: "LOGIN_SUCCESS",
       payload: {
          id: objUser.id,
-         first_name: objUser.first_name,
-         last_name: objUser.last_name,
-         username: objUser.username,
-         email: objUser.email,
-         gender: objUser.gender,
-         phone_number: objUser.phone_number,
-         avatar: objUser.avatar,
-         verified: objUser.verified
+         username: objUser.username
       }
    }
 }
@@ -113,7 +71,7 @@ export const keepLogin = (objUser) => {
 
 // USER LOGOUT START
 export const logoutUser = () => {
-   cookie.remove(`user`)
+   cookie.remove(`users`)
    return { type: `LOGOUT_SUCCESS` }
 }
 // USER LOGOUT END
@@ -247,7 +205,7 @@ export const loginAdmin = (username, password) => {
                id, username, email
             }
          })
-         cookie.set(`admin`, { id, username, password, email }, { path: `/` })
+         cookie.set(`admins`, { id, username, password, email }, { path: `/admin` })
 
          Swal.fire({
             position: `center`,
@@ -261,10 +219,22 @@ export const loginAdmin = (username, password) => {
 }
 // ADMIN LOGIN END
 
+// ADMIN KEEP LOGIN START
+export const keepLoginAdmin = (objAdmin) => {
+   return {
+      type: "ADMIN_LOGIN_SUCCESS",
+      payload: {
+         id: objAdmin.id,
+         username: objAdmin.username
+      }
+   }
+}
+// ADMIN KEEP LOGIN END
+
 // ADMIN LOGOUT START
 export const logoutAdmin = () => {
-   cookie.remove(`admin`)
-   return { type: `LOGOUT_SUCCESS` }
+   cookie.remove('admins')
+   return { type: 'ADMIN_LOGOUT_SUCCESS' }
 }
 // ADMIN LOGOUT END
 
