@@ -42,7 +42,7 @@ class HeaderAdmin extends Component {
 
          return (
             <div className='d-inline-flex'>
-               <nav className="navbar navbar-expand-lg text-white fixed-top" style={{ backgroundColor: 'black' }}>
+               <nav className="navbar navbar-expand-lg text-white fixed-top mt-1" style={{ backgroundColor: 'black' }}>
                   <div className="container text-uppercase">
                      <Link to='/admin'><h1 className="navbar-brand text-danger font-weight-bold">GET<span className='text-white font-weight-normal'>Motoka</span></h1></Link>
                      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,12 +50,12 @@ class HeaderAdmin extends Component {
                      </button>
                      <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
                         <ul className="navbar-nav">
-                           <li className="nav-item active">
-                              <Link to='/admin'><p className="nav-link text-danger">Admin <span className='text-white'>Dashboard</span></p></Link>
+                           <li className="nav-item active mt-3">
+                              <Link to='/admin'><p className="nav-link text-danger" style={{ marginTop: '10px' }}>Admin <span className='text-white'>Dashboard</span></p></Link>
                            </li>
                         </ul>
                      </div>
-                     <Link to='/admin/login'><button className='btn p-0 mr-3 text-uppercase text-white'>Login</button></Link>
+                     <Link to='/admin/login'><button className='btn p-0 mr-3 mb-1 text-uppercase text-white' style={{ marginBottom: '5px' }}>Login</button></Link>
                   </div>
                </nav>
             </div>
@@ -64,29 +64,30 @@ class HeaderAdmin extends Component {
 
       // Render setelah login
       return (
-         <div className='d-inline-flex'>
+         <div className='d-inline-flex p-0'>
             <nav className="navbar navbar-expand-lg text-white fixed-top" style={{ backgroundColor: 'black' }}>
                <div className="container text-uppercase">
-                  <Link to='/admin'><h1 className="navbar-brand text-danger font-weight-bold">GET<span className='text-white font-weight-normal'>Motoka</span></h1></Link>
+                  <Link to='/admin'><h1 className="navbar-brand text-danger font-weight-bold mt-1">GET<span className='text-white font-weight-normal'>Motoka</span></h1></Link>
                   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                      <span className="navbar-toggler-icon"></span>
                   </button>
                   <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
-                     <ul className="navbar-nav">
-                        <li className="nav-item active">
-                           <Link to='/admin'><p className="nav-link text-danger">Admin <span className='text-white'>Dashboard</span></p></Link>
-                        </li>
-                     </ul>
+                     <div className="navbar-nav p-0 mt-3" style={{ fontSize: '15px' }}>
+                        <Link to='/admin' type='a'><p className="nav-link text-danger">Dash<span className='text-white font-weight-lighter'>board</span></p></Link>
+                        <Link to='/manageproduct' type='a'><p className="nav-link text-danger">Manage<span className='text-white font-weight-lighter'>Product</span></p></Link>
+                        <Link to='/manageorder' type='a'><p className="nav-link text-danger">Manage<span className='text-white font-weight-lighter'>Order</span></p></Link>
+                        <Link to='/manageuser' type='a'><p className="nav-link text-danger">Manage<span className='text-white font-weight-lighter'>User</span></p></Link>
+                     </div>
                   </div>
-                  <UncontrolledDropdown setActiveFromChild >
+                  <UncontrolledDropdown setActiveFromChild className='mt-1'>
                      <DropdownToggle tag='a' className="nav-link bg-transparent" caret>
-                        Hello, {this.props.admin.username}
+                        Welcome,<span className='text-danger'> {this.props.admin.username}</span>
                      </DropdownToggle>
                      <DropdownMenu>
                         <DropdownItem className="nav-item btn-dark"
                            onClick={this.onButtonClick}>
                            Logout
-                           </DropdownItem>
+                        </DropdownItem>
                      </DropdownMenu>
                   </UncontrolledDropdown>
 

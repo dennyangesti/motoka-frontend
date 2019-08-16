@@ -188,8 +188,6 @@ export const userUpdateAvatar = (id, avatar, objUser) => {
 // --------------ADMIN-----------------
 // --------------START-----------------
 // ------------------------------------
-
-// ADMIN LOGIN START
 export const loginAdmin = (username, password) => {
    return (dispatch) => {
       axios.post(`/login/admin`,
@@ -197,23 +195,31 @@ export const loginAdmin = (username, password) => {
             username, password
          }
       ).then(res => {
-         const { id, username, email } = res.data
+         if (typeof (res.data) === 'string') {
+            Swal.fire({
+               type: `error`,
+               title: `Error 404`,
+               text: res.data
+            })
+         } else {
+            const { id, username, email } = res.data
 
-         dispatch({
-            type: `ADMIN_LOGIN_SUCCESS`,
-            payload: {
-               id, username, email
-            }
-         })
-         cookie.set(`admins`, { id, username, password, email }, { path: `/admin` })
+            dispatch({
+               type: `ADMIN_LOGIN_SUCCESS`,
+               payload: {
+                  id, username, email
+               }
+            })
+            cookie.set(`admins`, { id, username, password, email }, { path: `/admin ` })
 
-         Swal.fire({
-            position: `center`,
-            type: `success`,
-            title: `Login Success!`,
-            showConfirmButton: false,
-            timer: 1500
-         })
+            Swal.fire({
+               position: `center`,
+               type: `success`,
+               title: `Login Success!`,
+               showConfirmButton: false,
+               timer: 1500
+            })
+         }
       })
    }
 }

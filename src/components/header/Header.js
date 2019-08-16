@@ -44,24 +44,21 @@ class Header extends Component {
             <div className='d-inline-flex'>
                <nav className="navbar navbar-expand-lg text-white fixed-top" style={{ backgroundColor: 'black' }}>
                   <div className="container text-uppercase">
-                     <Link to='/'><h1 className="navbar-brand text-danger font-weight-bold">GET<span className='text-white font-weight-normal'>Motoka</span></h1></Link>
+                     <Link to='/'><h1 className="navbar-brand text-danger font-weight-bold mt-2">GET<span className='text-white font-weight-normal'>Motoka</span></h1></Link>
                      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                      </button>
                      <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
-                        <ul className="navbar-nav">
+                        <ul className="navbar-nav pt-3">
                            <li className="nav-item active">
                               <Link to='/'><p className="nav-link text-danger">Home</p></Link>
                            </li>
                            <li className="nav-item">
-                              <Link to='/category'><p className="nav-link text-white">Shop</p></Link>
+                              <Link to='/category'><p className="nav-link text-white">Product</p></Link>
                            </li>
                            <li className="nav-item">
-                              <Link to='/brand'><p className="nav-link text-white">Brand</p></Link>
+                              <Link to='/about'><p className="nav-link text-white">About</p></Link>
                            </li>
-                           <Link to='/about'><li className="nav-item">
-                              <p className="nav-link text-white">About</p>
-                           </li></Link>
                         </ul>
                      </div>
                    <Link to='/login'><button className='btn p-0 mr-3 text-uppercase text-white'>Login</button></Link>

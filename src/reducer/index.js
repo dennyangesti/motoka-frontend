@@ -71,6 +71,7 @@ const adminReducer = (state = initAdmin, action) => {
    switch (action.type) {
       case "ADMIN_LOGIN_SUCCESS":
          return {
+            ...state,
             id: action.payload.id,
             username: action.payload.username,
             email: action.payload.email

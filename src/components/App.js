@@ -33,13 +33,16 @@ class App extends Component {
 
       if (objCookieUser !== undefined) {
          //Login ulang
-         return this.props.keepLogin(objCookieUser)
+         this.props.keepLogin(objCookieUser)
+
 
       }
 
       if (objCookieAdmin !== undefined) {
          //Login ulang
-         return this.props.keepLogin(objCookieAdmin)
+
+         this.props.keepLoginAdmin(objCookieAdmin)
+
 
       }
    }

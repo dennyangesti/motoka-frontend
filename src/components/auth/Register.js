@@ -10,6 +10,10 @@ import Footer from '../Footer'
 
 class Register extends Component {
 
+   componentDidMount() {
+      window.scrollTo(0, 0)
+   }
+
    state = {
       register: false
    }
@@ -96,12 +100,12 @@ class Register extends Component {
             <div>
                <Header />
                <div style={{ backgroundImage: "url(http://www.hdcarwallpapers.com/walls/ford_gt_mk_ii_2019_5k_2-HD.jpg)", backgroundSize: 'cover', backgroundPosition: '65%' }}>
-                  <div className='mb-0 row' style={{ marginTop: "48px" }}>
+                  <div className='mb-0 row w-50 mx-auto' style={{ marginTop: "48px" }}>
                      <div className='col-sm-8 mx-auto card mt-5 mb-5 shadow-lg' style={{ opacity: '0.9' }}>
                         <div className='card-body '>
 
-                           <div className=' border-bottom border-secondary card-title'>
-                              <h1>Personal Registration</h1>
+                           <div className=' border-bottom border-secondary card-title text-center'>
+                              <h1>Registration</h1>
                            </div>
 
                            <form onSubmit={this.onEnter}>
@@ -139,7 +143,7 @@ class Register extends Component {
                            </form>
 
                            <div className='d-flex justify-content-start my-3 mt-5'>
-                              <button onClick={this.onButtonClick} className='btn btn-danger'>Register</button>
+                              <button onClick={this.onButtonClick} className='btn btn-danger w-100 '>Register</button>
                            </div>
 
                            <div className="mt-5 text-right">

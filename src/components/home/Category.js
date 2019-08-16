@@ -5,6 +5,7 @@ import Header from '../header/Header'
 import Footer from '../Footer'
 
 class Category extends Component {
+
    componentDidMount() {
       window.scrollTo(0, 0);
    }

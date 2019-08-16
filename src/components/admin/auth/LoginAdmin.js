@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { loginAdmin } from '../../../action'
+import { loginAdmin } from '../../../action/index'
 import HeaderAdmin from '../HeaderAdmin'
 
 
@@ -23,7 +23,7 @@ class LoginAdmin extends Component {
 
       // Tembak data ke database
       this.props.loginAdmin(username, password)
-      console.log(this.props.loginAdmin)
+      // console.log(this.props.loginAdmin)
    }
 
    render() {
