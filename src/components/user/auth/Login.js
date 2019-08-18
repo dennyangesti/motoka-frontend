@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { loginUser } from '../../action'
-import Header from '../header/Header'
-import Footer from '../Footer'
+import { loginUser } from '../../../action'
+import Header from '../../user/header/Header'
+import Footer from '../../Footer'
 
 import { InputGroup, InputGroupAddon, Button } from 'reactstrap'
 

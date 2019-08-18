@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import axios from '../../config/axios'
+import axios from '../../../config/axios'
 import { connect } from 'react-redux'
 import Swal from 'sweetalert2'
 
-import Header from '../header/Header'
-import Footer from '../Footer'
+import Header from '../../user/header/Header'
+import Footer from '../../Footer'
 
 
 class Register extends Component {

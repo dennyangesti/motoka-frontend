@@ -26,10 +26,10 @@ class Footer extends Component {
                   <div className='col p-0 py-4 text-right'>
                      <h4 className='text-uppercase font-weight-bold'>Our Store</h4>
                      <div className="list-group h6 font-weight-light">
-                        <Link to='/about'><p className='text-secondary'>About Us</p></Link>
-                        <Link to='/location'><p className='text-secondary'>Store Location</p></Link>
-                        <Link to='/shipping'><p className='text-secondary'>Shipping and Returns</p></Link>
-                        <Link to='/terms'><p className='text-secondary'>Terms and Condition</p></Link>
+                        <a href='#about' className='text-secondary'>About Us</a>
+                        <a href='#store' className='text-secondary'>Store Location</a>
+                        <a href='#shipping' className='text-secondary'>Shipping and Returns</a>
+                        <a href='#terms' className='text-secondary'>Terms and Condition</a>
                      </div>
                   </div>
                </div>

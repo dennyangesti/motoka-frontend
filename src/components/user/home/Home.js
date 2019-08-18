@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import ProductItem from '../product/ProductItem'
-import Category from '../home/Category';
-import BrandCar from '../home/BrandCar';
-import BrandMoto from '../home/BrandMoto';
+import BrandCar from '../about/BrandCar';
+import BrandMoto from '../about/BrandMoto';
 import MainCarousel from './MainCarousel';
 import Subscribe from '../home/Subcribe'
 
 import Header from '../header/Header'
-import Footer from '../Footer'
+import Footer from '../../Footer'
 
 
 class Home extends Component {
@@ -85,7 +84,7 @@ class Home extends Component {
       return (
          <div>
             <Header />
-            <div style={{ marginTop: '50px' }}>
+            <div style={{ marginTop: '58px' }}>
                <MainCarousel />
                <BrandCar />
                <BrandMoto />

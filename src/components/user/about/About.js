@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
-import Header from '../header/Header'
-import Footer from '../Footer'
+
 
 class About extends Component {
    componentDidMount() {
@@ -10,21 +9,20 @@ class About extends Component {
 
    render() {
       return (
-         <div>
-            <Header />
-            <div className='' style={{ marginTop: '50px', backgroundColor: 'black' }}>
-               <div className='container justify-content-center d-flex'>
-                  <img className='img-fluid' src={require('../../image/logo/motoka1.png')} width='150' alt='' />
+         <div id='about'>
+            <div className='pb-3' style={{ backgroundColor: 'black' }}>
+               <div className='justify-content-center d-flex'>
+                  <img className='img-fluid' src={require('../../../image/logo/motoka1.png')} width='150' alt='' />
                </div>
-            </div>
-            <div className='container'>
-               <div className='text-center'>
+               <div className='text-center text-white'>
                   <h4 className='p-0 m-0 mt-2'>Welcome to, </h4>
                   <h1>GETMotoka Indonesia</h1>
                </div>
+            </div>
+            <div className='container mt-2'>
                <div className='row'>
                   <div className='col-12'>
-                     <h1>Company Profile</h1>
+                     <h1 className='text-center'>Company Profile</h1>
                   </div>
                </div>
                <div className='row'>
@@ -36,7 +34,6 @@ class About extends Component {
                   </div>
                </div>
             </div>
-            <Footer />
          </div>
       )
    }
