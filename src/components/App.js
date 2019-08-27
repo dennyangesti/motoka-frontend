@@ -15,7 +15,8 @@ import Contact from './user/about/Contact'
 
 import Admin from './admin/Admin'
 import LoginAdmin from './admin/auth/LoginAdmin'
-import ManageProduct from './admin/manageproducts/ManageProduct'
+import ManageProduct from './admin/manage/ManageProduct'
+import ManageBrand from './admin/manage/ManageBrand'
 
 import { keepLogin, keepLoginAdmin } from '../action/index'
 
@@ -55,7 +56,6 @@ class App extends Component {
                <Route path="/register" component={Register} /> {/* include()  */}
                <Route path="/login" component={Login} /> {/* include()  */}
                <Route path='/product' component={Product} />
-               <Route path="/manageproduct" component={ManageProduct} /> {/* include()  */}
                <Route path="/detailproduct" component={DetailProduct} />
                <Route path="/editprofile" component={EditProfile} />
                {/* <Route path="/detailproduct/:product_id" component={DetailProduct} /> */}
@@ -66,6 +66,8 @@ class App extends Component {
             <div>
                <Route path='/admin' component={Admin} />
                <Route path='/admin/login' component={LoginAdmin} />
+               <Route path="/manageproduct" component={ManageProduct} /> {/* include()  */}
+               <Route path="/managebrand" component={ManageBrand} /> {/* include()  */}
             </div>
          </BrowserRouter>
       )
