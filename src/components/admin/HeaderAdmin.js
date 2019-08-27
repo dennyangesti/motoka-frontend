@@ -35,6 +35,11 @@ class HeaderAdmin extends Component {
       this.props.logoutAdmin()
    }
 
+   refresh = (reload) => {
+      document.location.reload(reload)
+   }
+
+
    render() {
 
       // Render sebelum login

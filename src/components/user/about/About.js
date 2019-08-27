@@ -10,7 +10,7 @@ class About extends Component {
    render() {
       return (
          <div id='about'>
-            <div className='pb-3' style={{ backgroundColor: 'black' }}>
+            <div className='pb-3' style={{ backgroundImage: 'url(https://ibb.co/kXsPPg6][img]https://i.ibb.co/bXMGGgR/Untitled-1.png)', backgroundPosition: '30%', backgroundSize: 'cover' }}>
                <div className='justify-content-center d-flex'>
                   <img className='img-fluid' src={require('../../../image/logo/motoka1.png')} width='150' alt='' />
                </div>

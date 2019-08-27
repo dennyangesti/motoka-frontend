@@ -97,21 +97,32 @@ class Header extends Component {
                         </li></Link>
                      </ul>
                   </div>
-                  <UncontrolledDropdown setActiveFromChild >
-                     <DropdownToggle tag='a' className="nav-link bg-transparent mb-1" caret>
-                        Welcome, <span className='text-danger'>{this.props.user.username}</span>
-                     </DropdownToggle>
-                     <DropdownMenu>
-                        <DropdownItem tag='a' href='/editprofile' className="nav-item btn-outline-dark text-capitalize">
-                           Edit Profile
+                  <div>
+                     <ul className="navbar-nav mb-0 mt-2">
+                        <li className="nav-item active">
+                           <Link to='/cart'>
+                              <p className="nav-link text-white">Cart</p>
+                           </Link>
+                        </li>
+                        <li className="nav-item">
+                           <UncontrolledDropdown setActiveFromChild >
+                              <DropdownToggle tag='a' className="nav-link bg-transparent mb-1" caret>
+                                 Welcome, <span className='text-danger'>{this.props.user.username}</span>
+                              </DropdownToggle>
+                              <DropdownMenu>
+                                 <DropdownItem tag='a' href='/editprofile' className="nav-item btn-outline-dark text-capitalize">
+                                    Edit Profile
                            </DropdownItem>
-                        <DropdownItem className="nav-item btn-dark"
-                           onClick={this.onButtonClick}>
-                           Logout
+                                 <DropdownItem className="nav-item btn-dark"
+                                    onClick={this.onButtonClick}>
+                                    Logout
                            </DropdownItem>
-                     </DropdownMenu>
-                  </UncontrolledDropdown>
+                              </DropdownMenu>
+                           </UncontrolledDropdown>
+                        </li>
+                     </ul>
 
+                  </div>
                </div>
             </nav>
          </div>

@@ -270,11 +270,9 @@ class Product extends Component {
                                        <Container>
                                           <Row>
                                              <Col sm='8'>
-                                                <Link>
-                                                   <Card>
-                                                      <CardImg top width='100%' src={require('../../../image/product/lamborghini/huracan-evo-1.jpg')} alt='' />
-                                                   </Card>
-                                                </Link>
+                                                <Card onClick={{}}>
+                                                   <CardImg top width='100%' src={require('../../../image/product/lamborghini/huracan-evo-1.jpg')} alt='' />
+                                                </Card>
                                              </Col>
                                              <Col sm='4'>
                                                 <h1 className="display-5">Lamborghini Huracan Evo</h1>

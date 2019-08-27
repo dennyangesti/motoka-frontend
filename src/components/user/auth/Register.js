@@ -108,6 +108,7 @@ class Register extends Component {
                               <h1>Registration</h1>
                            </div>
 
+
                            <form onSubmit={this.onEnter}>
                               <label htmlFor='form-control'>Name:</label>
                               <div className="input-group">
@@ -130,7 +131,6 @@ class Register extends Component {
                                  <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                               </div>
                               {/* </form> */}
-
                               {/* <form> */}
                               <label htmlFor='form-control'>Password:</label>
                               <div className="input-group">
@@ -139,8 +139,8 @@ class Register extends Component {
                               </div>
                               <small id="passwordHelp" className="form-text text-muted">Please remember your own password and do not share to anyone else.</small>
                               {/* </form> */}
-
                            </form>
+
 
                            <div className='d-flex justify-content-start my-3 mt-5'>
                               <button onClick={this.onButtonClick} className='btn btn-danger w-100 '>Register</button>
