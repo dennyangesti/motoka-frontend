@@ -10,7 +10,9 @@ import HeaderAdmin from '../HeaderAdmin'
 class ManageProduct extends Component {
    state = {
       products: [],
+      searchProducts: [],
       brands: [],
+      searchBrands: [],
       edit: 0,
       input: false,
       upload: 0
@@ -25,7 +27,7 @@ class ManageProduct extends Component {
    getProduct = () => {
       axios.get('http://localhost:2019/products')
          .then(res => {
-            this.setState({ products: res.data, edit: 0, input: 0, upload: 0 })
+            this.setState({ products: res.data, searchProducts: res.data, edit: 0, input: 0, upload: 0 })
             console.log(res.data);
 
          })
@@ -34,7 +36,7 @@ class ManageProduct extends Component {
    getBrands = () => {
       axios.get('http://localhost:2019/brands')
          .then(res => {
-            this.setState({ brands: res.data, edit: 0 })
+            this.setState({ brands: res.data, searchBrands: res.data, edit: 0 })
             console.log(res.data);
 
          })
@@ -134,6 +136,39 @@ class ManageProduct extends Component {
             )
             this.getProduct()
          })
+   }
+
+   onFilterItem = () => {
+      const search = this.search.value
+      const searchInput = this.searchInput.value
+      console.log(search);
+      console.log(searchInput);
+
+
+
+      if (this.search.value === "Car Name") {
+         const search_product = this.state.searchProducts.filter(item => {
+            if (searchInput) {
+               return (
+                  item.product_name.toLowerCase().includes(searchInput.toLowerCase())
+               )
+            }
+         })
+
+         this.setState({ products: search_product })
+         this.setState({ brands: this.state.searchBrands })
+      } else if (this.search.value === "Brand Name") {
+         const search_brand = this.state.searchBrands.filter(item => {
+            if (searchInput) {
+               return (
+                  item.brand_name.toLowerCase().includes(searchInput.toLowerCase())
+               )
+            }
+         })
+
+         this.setState({ brands: search_brand })
+         this.setState({ products: this.state.searchProducts })
+      }
    }
 
    renderBrand = () => {
@@ -276,8 +311,14 @@ class ManageProduct extends Component {
             <HeaderAdmin />
             <div className="container" style={{ marginTop: 60 }}>
                <h1 className="display-4 text-center">Car List</h1>
-               <div className='d-flex justify-content-end'>
-                  <button className="btn btn-primary w-100" onClick={() => this.setState({ input: !this.state.input })}>Add</button>
+               <div className="row">
+                  <select className="col-3 m-1 form-control" ref={option => { this.search = option }}>
+                     <option>Car Name</option>
+                     <option>Brand Name</option>
+                  </select>
+                  <input className="col-4 m-1" ref={input => { this.searchInput = input }}></input>
+                  <button className="col-2 m-1" onClick={this.onFilterItem}>Search</button>
+                  <button className="col-2 m-1 btn btn-primary w-100" onClick={() => this.setState({ input: !this.state.input })}>Add Product</button>
                </div>
                <table className="table table-hover mb-5">
                   <thead>
@@ -293,8 +334,8 @@ class ManageProduct extends Component {
                      </tr>
                   </thead>
                   <tbody>
-                     {this.renderList()}
                      {this.renderInputList()}
+                     {this.renderList()}
                   </tbody>
                </table>
             </div>
