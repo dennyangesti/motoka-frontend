@@ -13,9 +13,9 @@ class ManageProduct extends Component {
       searchProducts: [],
       brands: [],
       searchBrands: [],
+      upload: 0,
       edit: 0,
-      input: false,
-      upload: 0
+      input: false
    }
 
    componentDidMount() {
