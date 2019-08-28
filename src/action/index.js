@@ -1,8 +1,6 @@
-
 import axios from '../config/axios'
 import cookies from 'universal-cookie'
 import Swal from 'sweetalert2'
-
 
 const cookie = new cookies()
 
@@ -10,7 +8,6 @@ const cookie = new cookies()
 // --------------USER------------------
 // --------------START-----------------
 // ------------------------------------
-
 
 // USER LOGIN START
 export const loginUser = (username, password) => {
@@ -27,31 +24,102 @@ export const loginUser = (username, password) => {
                text: res.data
             })
          } else {
-            const { id, first_name, last_name, username, password, email, verified, gender, address, avatar } = res.data
-            if (verified === 1) {
-               dispatch({
-                  type: `LOGIN_SUCCESS`,
-                  payload: {
-                     id, first_name, last_name, username, password, email, verified, gender, address, avatar
-                  }
-               })
-               cookie.set(`users`, { id, first_name, last_name, username, password, email, verified, gender, address, avatar }, { path: `/` })
+            const { id, first_name, last_name, username, email, gender, address, avatar } = res.data
+            dispatch({
+               type: `LOGIN_SUCCESS`,
+               payload: {
+                  id, first_name, last_name, username, email, gender, address, avatar
+               }
+            })
+            cookie.set('motokaUser', { id, first_name, last_name, username, email, gender, address, avatar }, { path: `/` })
 
-               Swal.fire({
-                  position: `center`,
-                  type: `success`,
-                  title: `Login Success!`,
-                  showConfirmButton: false,
-                  timer: 1500
-               })
+            Swal.fire({
+               position: `center`,
+               type: `success`,
+               title: `Login Success!`,
+               showConfirmButton: false,
+               timer: 1500
+            })
+         }
+      })
+   }
+}
 
-            } else {
-               Swal.fire({
-                  type: `error`,
-                  title: `Email has not been verified`,
-                  text: `Please check your email to verified`
-               })
+// USER LOGOUT START
+export const logoutUser = () => {
+   cookie.remove('motokaUser')
+   return { type: `LOGOUT_SUCCESS` }
+}
+// USER LOGOUT END
+
+//UDPATE PROFILE BUTTON
+export const editProfile = (id, firstName, lastName, email, gender, address) => {
+   return (dispatch) => {
+      axios.patch(`/editprofile/${id}`,
+         {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            gender: gender,
+            address: address
+         }
+      ).then(res => {
+         const { id, first_name, last_name, username, email, gender, avatar, address } = res.data
+         console.log(res)
+
+         dispatch({
+            type: 'PROFILE_UPDATE_SUCCESS',
+            payload: {
+               id: id,
+               first_name: first_name,
+               last_name: last_name,
+               username: username,
+               email: email,
+               gender: gender,
+               avatar: avatar,
+               address: address
             }
+         })
+
+         cookie.set('motokaUser', { id, first_name, last_name, username, email, gender, avatar, address }, { path: '/' })
+      })
+   }
+}
+
+//UPDATE or POST AVATAR TO USER
+export const updateAvatar = (id, avatar, objUser) => {
+   return (dispatch) => {
+      const formData = new FormData()
+      formData.append('avatar', avatar)
+
+      axios.patch(`/updateavatar/${id}`, formData).then(res => {
+         if (typeof (res.data) === 'number') {
+            Swal.fire({
+               type: 'error',
+               title: 'error 404',
+               text: res.data
+            })
+         } else {
+            const { id, first_name, last_name, username, email, gender, address } = objUser
+
+            console.log(res.data)
+
+            dispatch({
+               type: 'PROFILE_PICTURE_UPLOADED',
+               payload: {
+                  avatar: res.data
+               }
+            })
+
+            cookie.set('motokaUser', { id, first_name, last_name, username, email, gender, avatar: res.data, address }, { path: '/' })
+
+            Swal.fire({
+               position: 'center',
+               type: 'success',
+               title: 'Profile Picture Uploaded!',
+               showConfirmButton: false,
+               timer: 1500
+            })
          }
       })
    }
@@ -63,121 +131,17 @@ export const keepLogin = (objUser) => {
       type: "LOGIN_SUCCESS",
       payload: {
          id: objUser.id,
-         username: objUser.username
+         username: objUser.username,
+         first_name: objUser.first_name,
+         last_name: objUser.last_name,
+         email: objUser.email,
+         gender: objUser.gender,
+         address: objUser.address,
+         avatar: objUser.avatar
       }
    }
 }
 // USER KEEP LOGIN END
-
-// USER LOGOUT START
-export const logoutUser = () => {
-   cookie.remove(`users`)
-   return { type: `LOGOUT_SUCCESS` }
-}
-// USER LOGOUT END
-
-// USER UPDATE PROFILE BUTTON START
-export const userUpdate = (id, firstName, lastName, username, email, phoneNumber) => {
-   return (dispatch) => {
-      axios.patch(`/updateprofile/${id}`,
-         {
-            first_name: firstName,
-            last_name: lastName,
-            username: username,
-            email: email,
-            phone_number: phoneNumber
-         }
-      ).then(res => {
-         const { id, first_name, last_name, username, password, email, verified, gender, address, avatar } = res.data
-
-         dispatch({
-            type: 'UPDATE_PROFILE_SUCCESS',
-            payload: {
-               id, first_name, last_name, username, password, email, verified, gender, address, avatar
-            }
-         })
-
-         cookie.set(`users`, { id, first_name, last_name, username, password, email, verified, gender, address, avatar }, { path: `/` })
-      })
-   }
-}
-// USER UPDATE PROFILE BUTTON END
-
-// USER UPDATE AVATAR START
-export const userUpdateAvatar = (id, avatar, objUser) => {
-   return (dispatch) => {
-      const formData = new FormData()
-      formData.append(`avatar`, avatar)
-
-      axios.patch(`/updateavatar/${id}`, formData).then(res => {
-         if (typeof (res.data) == 'number') {
-            Swal.fire({
-               type: `error`,
-               title: `Error 404`,
-               text: res.data
-            })
-         } else {
-            const { id, first_name, last_name, username, email, gender, phone_number, verified } = objUser
-
-            dispatch({
-               type: `AVATAR_UPDATES_SUCCESS`,
-               payload: {
-                  avatar: res.data
-               }
-            })
-
-            cookie.set(`users`, { id, first_name, last_name, username, email, gender, phone_number, verified, avatar: res.data }, { path: `/` })
-
-            Swal.fire({
-               position: `center`,
-               type: `success`,
-               title: `Success Upload User Avatar`,
-               showConfirmButton: false,
-               timer: 1500
-            })
-
-         }
-      })
-   }
-}
-// USER UPDATE AVATAR END
-
-// /// USER CHANGE PASSWORD START
-// export default userChangePassword = (id, oldPass, newPass, newPassConfirm) => {
-//    return () => {
-//       if (newPass == newPassConfirm) {
-//          if (oldPass !== newPass) {
-//             axios.patch(`/updatepassword/${id}`,
-//                {
-//                   oldPass,
-//                   newPass
-//                }
-//             ).then(res => {
-//                Swal.fire({
-//                   position: `center`,
-//                   type: `success`,
-//                   title: `Success Updates Password`,
-//                   showConfirmButton: false,
-//                   timer: 1500
-//                })
-//             })
-//          } else {
-//             Swal.fire({
-//                type: `error`,
-//                title: `New password must be different`,
-//                text: `Please change another password`
-//             })
-//          }
-//       } else {
-//          Swal.fire({
-//             type: `error`,
-//             title: `Invalid, password doesn't match`,
-//             text: `Password and confirm password must be same`
-//          })
-//       }
-//    }
-// }
-// /// USER CHANGE PASSWORD END
 
 // ------------------------------------
 // ---------------USER-----------------
@@ -210,7 +174,7 @@ export const loginAdmin = (username, password) => {
                   id, username, email
                }
             })
-            cookie.set(`admins`, { id, username, password, email }, { path: `/admin ` })
+            cookie.set('motokaAdmin', { id, username, password, email }, { path: `/admin ` })
 
             Swal.fire({
                position: `center`,
@@ -231,7 +195,7 @@ export const keepLoginAdmin = (objAdmin) => {
       type: "ADMIN_LOGIN_SUCCESS",
       payload: {
          id: objAdmin.id,
-         username: objAdmin.username
+         username: objAdmin.username,
       }
    }
 }
@@ -239,7 +203,7 @@ export const keepLoginAdmin = (objAdmin) => {
 
 // ADMIN LOGOUT START
 export const logoutAdmin = () => {
-   cookie.remove('admins')
+   cookie.remove('motokaAdmin')
    return { type: 'ADMIN_LOGOUT_SUCCESS' }
 }
 // ADMIN LOGOUT END
@@ -250,10 +214,10 @@ export const logoutAdmin = () => {
 // ------------------------------------
 
 // ADD TO CART START
-export const addCart = (user_id, first_name, last_name, phone_number, product_id, quantity, total_price) => {
+export const addCart = (user_id, first_name, last_name, product_id, quantity, total_price) => {
    axios.patch(`/cart`,
       {
-         user_id, first_name, last_name, phone_number, product_id, quantity, total_price
+         user_id, first_name, last_name, product_id, quantity, total_price
       }
    ).then(res => {
       if (typeof (res.data) == `string`) {

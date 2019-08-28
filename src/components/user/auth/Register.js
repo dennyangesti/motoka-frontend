@@ -25,15 +25,15 @@ class Register extends Component {
 
    onButtonClick = async () => {
 
-      const firstName = this.firstName.value
-      const lastName = this.lastName.value
+      const first_name = this.firstName.value
+      const last_name = this.lastName.value
       const username = this.username.value
       const email = this.email.value
       const password = this.password.value
       const confirmPass = this.confirmPass.value
 
-      console.log(firstName)
-      console.log(lastName)
+      console.log(first_name)
+      console.log(last_name)
       console.log(username)
       console.log(email)
       console.log(password)
@@ -52,8 +52,8 @@ class Register extends Component {
       try {
          const res = await axios.post('/register',
             {
-               first_name: firstName,
-               last_name: lastName,
+               first_name: first_name,
+               last_name: last_name,
                username: username,
                email: email,
                password: password

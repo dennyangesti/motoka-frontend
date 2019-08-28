@@ -173,7 +173,7 @@ class ManageBrand extends Component {
                         </CardText>
                      </CardBody>
                   </Card>
-                  <Card body inverse style={{ backgroundColor: 'black', borderColor: 'black' }} className='fixed-bottom m-0 p-0'>
+                  <Card body inverse style={{ backgroundColor: 'rgba(0,0,0,0.9)', borderColor: 'rgba(0,0,0,0.9)' }} className='fixed-bottom m-0 p-0'>
                      <CardBody>
                         <CardText>
                            <div className='text-center'>

@@ -11,10 +11,10 @@ import HeaderAdmin from '../HeaderAdmin'
 
 class ManageProduct extends Component {
    state = {
-      products: [],
-      searchProducts: [],
-      brands: [],
-      searchBrands: [],
+      productState: [],
+      searchProduct: [],
+      brandState: [],
+      searchBrand: [],
       upload: 0,
       edit: 0,
       input: false,
@@ -24,22 +24,22 @@ class ManageProduct extends Component {
    componentDidMount() {
       // Akses database
       this.getProduct()
-      this.getBrands()
+      this.getBrand()
    }
 
    getProduct = () => {
       axios.get('http://localhost:2019/products')
          .then(res => {
-            this.setState({ products: res.data, searchProducts: res.data, edit: 0, input: 0, upload: 0 })
+            this.setState({ productState: res.data, searchProduct: res.data, edit: 0, input: 0, upload: 0 })
             console.log(res.data);
 
          })
    }
 
-   getBrands = () => {
+   getBrand = () => {
       axios.get('http://localhost:2019/brands')
          .then(res => {
-            this.setState({ brands: res.data, searchBrands: res.data, edit: 0 })
+            this.setState({ brandState: res.data, searchBrand: res.data, edit: 0 })
             console.log(res.data);
 
          })
@@ -52,7 +52,6 @@ class ManageProduct extends Component {
       const price = parseInt(this.price.value)
       const stock = this.stock.value
       console.log(this.brand.value);
-
 
       axios.post(
          'http://localhost:2019/addproducts',
@@ -150,8 +149,10 @@ class ManageProduct extends Component {
       const brandInput = this.brandInput.value
       const max = parseInt(this.max.value)
       const min = parseInt(this.min.value)
+      console.log(this.brandInput.value)
+      console.log(this.name.value)
 
-      let searchProduct = this.state.searchProducts.filter(item => {
+      let searchingProduct = this.state.searchProduct.filter(item => {
          if (isNaN(min) && isNaN(max)) { // Search by Name
             return (
                item.product_name.toLowerCase().includes(name.toLowerCase())
@@ -177,7 +178,7 @@ class ManageProduct extends Component {
          }
       })
 
-      let searchBrand = this.state.searchBrands.filter(item => {
+      let searchingBrand = this.state.searchBrand.filter(item => {
          if (brandInput) {
             return (
                item.brand_name.toLowerCase().includes(brandInput.toLowerCase())
@@ -185,17 +186,18 @@ class ManageProduct extends Component {
          }
       })
 
-      if (searchProduct) {
-         this.setState({ products: searchProduct, filter: true })
+      if (searchingProduct) {
+         this.setState({ productState: searchingProduct, filter: true })
       }
-      if (searchBrand) {
-         this.setState({ brands: searchBrand, filter: true })
+      if (searchingBrand) {
+         this.setState({ brandState: searchingBrand, filter: true })
       }
+
    }
 
    resetFilter = () => {
       return (
-         this.setState({ products: this.state.searchProducts, brands: this.state.searchBrands, filter: false })
+         this.setState({ productState: this.state.searchProduct, brandState: this.state.searchBrand, filter: false })
       )
    }
 
@@ -206,7 +208,7 @@ class ManageProduct extends Component {
    }
 
    renderBrand = () => {
-      return this.state.brands.map(brandMap => {
+      return this.state.brandState.map(brandMap => {
          return (<option value={brandMap.id}>{brandMap.brand_name}</option>)
       })
    }
@@ -236,9 +238,9 @@ class ManageProduct extends Component {
    }
 
    renderList = () => {
-      return this.state.products.map(item => { // {id, name, price, description, src}
+      return this.state.productState.map(item => { // {id, name, price, description, src}
          if (item.id !== this.state.edit) {
-            return this.state.brands.map(brandMap => {
+            return this.state.brandState.map(brandMap => {
                if (item.brand_id === brandMap.id) {
                   if (item.id !== this.state.upload) {
                      if (item.image) {
@@ -350,28 +352,30 @@ class ManageProduct extends Component {
                      <Card style={{ marginBottom: 400 }}>
                         <CardBody>
                            <CardText>
-                              <table className="table table-hover mb-5 text-center">
-                                 <thead className='thead-dark'>
-                                    <tr>
-                                       <th scope="col">ID</th>
-                                       <th scope="col">PRODUCT NAME</th>
-                                       <th scope="col">BRAND</th>
-                                       <th scope="col">DESC</th>
-                                       <th scope="col">PRICE</th>
-                                       <th scope="col">STOCK</th>
-                                       <th scope="col">PICTURE</th>
-                                       <th scope="col">ACTION</th>
-                                    </tr>
-                                 </thead>
-                                 <tbody className='thead-light'>
-                                    {this.renderInputList()}
-                                    {this.renderList()}
-                                 </tbody>
-                              </table>
+                              <div>
+                                 <table className="table table-hover mb-5 text-center">
+                                    <thead className='thead-dark'>
+                                       <tr>
+                                          <th scope="col">ID</th>
+                                          <th scope="col">PRODUCT NAME</th>
+                                          <th scope="col">BRAND</th>
+                                          <th scope="col">DESC</th>
+                                          <th scope="col">PRICE</th>
+                                          <th scope="col">STOCK</th>
+                                          <th scope="col">PICTURE</th>
+                                          <th scope="col">ACTION</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody className='thead-light'>
+                                       {this.renderInputList()}
+                                       {this.renderList()}
+                                    </tbody>
+                                 </table>
+                              </div>
                            </CardText>
                         </CardBody>
                      </Card>
-                     <Card body inverse style={{ backgroundColor: 'black', borderColor: 'black' }} className='fixed-bottom m-0 p-0'>
+                     <Card body inverse style={{ backgroundColor: 'rgba(0,0,0,0.9)', borderColor: 'rgba(0,0,0,0.9)' }} className='fixed-bottom m-0 p-0'>
                         <CardBody>
                            <CardText>
                               <div className='container'>
@@ -426,28 +430,30 @@ class ManageProduct extends Component {
                   <Card style={{ marginBottom: 270 }}>
                      <CardBody>
                         <CardText>
-                           <table className="table table-hover mb-5 text-center">
-                              <thead className='thead-dark'>
-                                 <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">PRODUCT NAME</th>
-                                    <th scope="col">BRAND</th>
-                                    <th scope="col">DESC</th>
-                                    <th scope="col">PRICE</th>
-                                    <th scope="col">STOCK</th>
-                                    <th scope="col">PICTURE</th>
-                                    <th scope="col">ACTION</th>
-                                 </tr>
-                              </thead>
-                              <tbody className='thead-light'>
-                                 {this.renderInputList()}
-                                 {this.renderList()}
-                              </tbody>
-                           </table>
+                           <div>
+                              <table className="table table-hover mb-5 text-center">
+                                 <thead className='thead-dark'>
+                                    <tr>
+                                       <th scope="col">ID</th>
+                                       <th scope="col">PRODUCT NAME</th>
+                                       <th scope="col">BRAND</th>
+                                       <th scope="col">DESC</th>
+                                       <th scope="col">PRICE</th>
+                                       <th scope="col">STOCK</th>
+                                       <th scope="col">PICTURE</th>
+                                       <th scope="col">ACTION</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody className='thead-light'>
+                                    {this.renderInputList()}
+                                    {this.renderList()}
+                                 </tbody>
+                              </table>
+                           </div>
                         </CardText>
                      </CardBody>
                   </Card>
-                  <Card body inverse style={{ backgroundColor: 'black', borderColor: 'black' }} className='fixed-bottom m-0 p-0'>
+                  <Card body inverse style={{ backgroundColor: 'rgba(0,0,0,0.9)', borderColor: 'rgba(0,0,0,0.9)' }} className='fixed-bottom m-0 p-0'>
                      <CardBody>
                         <CardText>
                            <div className='container'>

@@ -7,16 +7,13 @@ const initUser = {
    username: '',
    email: '',
    gender: '',
-   phone_number: '',
    avatar: '',
    address: '',
-   verified: 0
 }
 
 const initAdmin = {
    id: '',
    username: '',
-   email: '',
 }
 
 const userReducer = (state = initUser, action) => {
@@ -30,18 +27,18 @@ const userReducer = (state = initUser, action) => {
             username: action.payload.username,
             email: action.payload.email,
             gender: action.payload.gender,
-            phone_number: action.payload.gender,
             avatar: action.payload.avatar,
             address: action.payload.address,
-            verified: action.payload.verified
          }
 
       case "LOGOUT_SUCCESS":
          return {
-            initUser
+            ...state,
+            id: '',
+            username: ''
          }
 
-      case "UPDATE_PROFILE_SUCCESS":
+      case 'PROFILE_UPDATE_SUCCESS':
          return {
             ...state,
             id: action.payload.id,
@@ -50,12 +47,11 @@ const userReducer = (state = initUser, action) => {
             username: action.payload.username,
             email: action.payload.email,
             gender: action.payload.gender,
-            phone_number: action.payload.gender,
             avatar: action.payload.avatar,
-            address: action.payload.address,
+            address: action.payload.address
          }
 
-      case "AVATAR_UPDATES_SUCCESS":
+      case 'PROFILE_PICTURE_UPLOADED':
          return {
             ...state,
             avatar: action.payload.avatar
@@ -74,12 +70,13 @@ const adminReducer = (state = initAdmin, action) => {
             ...state,
             id: action.payload.id,
             username: action.payload.username,
-            email: action.payload.email
          }
 
       case "ADMIN_LOGOUT_SUCCESS":
          return {
-            initAdmin
+            ...state,
+            id: '',
+            username: ''
          }
 
       default:

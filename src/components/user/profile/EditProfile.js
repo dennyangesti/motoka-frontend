@@ -1,119 +1,88 @@
 import React, { Component } from 'react'
-import {
-   Card, CardImg
-} from 'reactstrap';
+import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import axios from '../../../config/axios';
 
 import Header from '../header/Header'
 import Footer from '../../Footer'
 
+
+import { editProfile } from '../../../action/index'
+
+
 class EditProfile extends Component {
 
-   state = {
-      data: null
-   }
-   onButtonClick = () => {
+   onEditProfile = () => {
+      const id = this.props.user.id
+      const firstName = this.firstName.value
+      const lastName = this.lastName.value
+      const email = this.email.value
+      const gender = this.gender.value
+      const address = this.address.value
 
-      const formData = new FormData()
-
-      const avatar = this.avatar.files[0]
-      const data_name = this.name.value
-      const data_email = this.email.value
-      const data_age = this.age.value
-      const data_password = this.password.value
-
-      //Nama field di backend = ravatar
-      formData.append('ravatar', avatar)
-      formData.append('name', data_name)
-      formData.append('email', data_email)
-      formData.append('age', data_age)
-      formData.append('password', data_password)
-
-      axios.patch(
-         'users/' + this.props.userid,
-         formData
-      ).then(res => {
-         console.log(res.data)
-         console.log('Upload berhasil')
-      })
-
-   }
-
-   componentDidMount() {
-      // Get Profile
-      axios.get('/users/' + this.props.userid)
-         .then(res => {
-            this.setState({ data: res.data });
-
-         })
+      this.props.editProfile(id, firstName, lastName, email, gender, address)
+      console.log(this.address.value)
    }
 
 
    render() {
-      if (this.state.data) {
-         var { name, email, age } = this.state.data
 
+      if (this.props.user.username === '') {
+         console.log(this.props.user.username)
+         return (
+            // <Redirect to='/' />
+            <div>Loading</div>
+         )
+      } else {
          return (
             <div>
                <Header />
-               <div className='container mb-5' style={{ marginTop: 88 }}>
-                  <div className='row'>
-                     <div className='col-4'>
-                        <div>
-                           <Card>
-                              <CardImg top width="100%" src={require('../../../image/subur.jpg')} alt="Card image cap" className='rounded' />
-                           </Card>
-                        </div>
-                        <form>
-                           <div className='custom-file'>
-                              <input type='file' ref={input => { this.avatar = input }} />
-                           </div>
-                        </form>
-                     </div>
-                     <div className='col-8'>
-                        <form>
-                           <h1>Edit Profile</h1>
-                           <div className="form-group">
-                              <label htmlFor="name">Name</label>
-                              <input ref={input => this.name = input} type="text" className="form-control" id="name" defaultValue={name} />
-                           </div>
-                           <div className="form-group">
-                              <label htmlFor="email">Email address</label>
-                              <input ref={input => this.email = input} type="email" className="form-control" id="email" defaultValue={email} />
-                              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                           </div>
-                           <div className="form-group">
-                              <label htmlFor="age">Age</label>
-                              <input ref={input => this.age = input} type="number" className="form-control" id="age" defaultValue={age} />
-                           </div>
-                           <div className="form-group">
-                              <label htmlFor="password">Password</label>
-                              <input ref={input => this.password = input} type="password" className="form-control" id="password" />
-                           </div>
-                        </form>
+               <div className='container'>
+                  <div className="row my-4">
+                     <div class="card col-sm-12 col-md-6 col-lg-7">
+                        <div class="card-body">
+                           <h2 className='mb-4'>Edit Profile</h2>
+                           <form>
+                              <div className="input-group">
+                                 <input type="text" className="form-control" defaultValue={this.props.user.first_name} placeholder='*First Name' ref={(firstName) => { this.firstName = firstName }} />
+                                 <input type="text" className="form-control" defaultValue={this.props.user.last_name} placeholder='Last Name' ref={(lastName) => { this.lastName = lastName }} />
+                              </div>
 
-                        <button
-                           className='btn btn-primary'
-                           onClick={this.onButtonClick}
-                        >Update Photo</button>
+                              <form className='input-group mt-3'>
+                                 <input className='form-control' placeholder='*Email' type="email" defaultValue={this.props.user.email}
+                                    ref={(email) => { this.email = email }}></input>
+                              </form>
+
+
+                              <form className='input-group my-3'>
+                                 <input className='form-control' placeholder='Address' defaultValue={this.props.user.address}
+                                    ref={(address) => { this.address = address }}></input>
+                              </form>
+
+                              <div class="input-group mb-3">
+                                 <select class="custom-select" id="inputGroupSelect01" ref={input => this.gender = input} defaultValue={this.props.user.gender}>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                 </select>
+                              </div>
+                           </form>
+                           <button className='btn btn-primary mt-3' onClick={this.onEditProfile}>Update Profile</button>
+                        </div>
                      </div>
                   </div>
                </div>
                <Footer />
             </div>
+
          )
       }
-      return <h1>Loading</h1>
-
    }
 }
 
 
-const mps = state => {
+const mapStateToProps = (state) => {
    return {
-      userid: state.auth.id
+      user: state.auth
    }
 }
 
-export default connect(mps)(EditProfile)
+export default connect(mapStateToProps, { editProfile })(EditProfile)
