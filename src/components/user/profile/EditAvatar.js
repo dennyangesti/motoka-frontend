@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { updateAvatar } from '../../../action/index'
+import { Card, Button, CardTitle, CardText, Row, Col, CardImg } from 'reactstrap';
 
+import { updateAvatar } from '../../../action/index'
 import Header from '../header/Header'
 import Footer from '../../Footer'
 
@@ -33,26 +34,25 @@ class ChangeAvatar extends Component {
             return (
                <div>
                   <Header />
-                  <div className='container'>
-                     <div className="row my-4">
-                        <div class="card col-sm-12 col-md-6 col-lg-7">
-                           <div class="card-body">
-
-                              <h2 className='mb-4'>Change Profile Picture</h2>
-
-                              <img className='d-block img-thumbnail w-50 mb-5' src={defaultAvatar} alt="Profile Picture" />
-
-                              <form>
-                                 <div class="form-group">
-                                    <input type="file" class="form-control-file" id="exampleFormControlFile1" ref={input => this.avatar = input} />
-                                 </div>
-                              </form>
-
-                              <button className='btn btn-primary' onClick={this.onUpdateAvatar}>Update Profile Picture</button>
-
-                           </div>
-                        </div>
-                     </div>
+                  <div className='container mb-5' style={{ marginTop: 80 }}>
+                     <Row>
+                        <Col sm="6">
+                           <Card body>
+                           <img className='d-block w-100' src={defaultAvatar} alt="Profile Picture" />
+                           </Card>
+                        </Col>
+                        <Col sm="6">
+                        <Card body>
+                        <h5 class="card-title">Change Profile Picture</h5>
+                           <form>
+                              <div class="form-group">
+                                 <input type="file" class="form-control-file" id="exampleFormControlFile1" ref={input => this.avatar = input} />
+                              </div>
+                           </form>
+                           <button className='btn btn-primary' onClick={this.onUpdateAvatar}>Update Profile Picture</button>
+                           </Card>
+                        </Col>
+                     </Row>
                   </div>
                   <Footer />
                </div>
@@ -61,26 +61,25 @@ class ChangeAvatar extends Component {
             return (
                <div>
                   <Header />
-                  <div className='container'>
-                     <div className="row my-4">
-                        <div class="card col-sm-12 col-md-6 col-lg-7">
-                           <div class="card-body">
-
-                              <h2 className='mb-4'>Change Profile Picture</h2>
-
-                              <img className='d-block img-thumbnail w-50 mb-5' src={`http://localhost:2019/users/avatar/${this.props.user.avatar}`} alt="Profile Picture" key={new Date()} />
-
-                              <form>
-                                 <div class="form-group">
-                                    <input type="file" class="form-control-file" id="exampleFormControlFile1" ref={input => this.avatar = input} />
-                                 </div>
-                              </form>
-
-                              <button className='btn btn-primary' onClick={this.onUpdateAvatar}>Update Profile Picture</button>
-
-                           </div>
-                        </div>
-                     </div>
+                  <div className='container mb-5' style={{ marginTop: 80 }}>
+                     <Row>
+                        <Col sm="6">
+                           <Card body>
+                           <img className='d-block w-100' src={`http://localhost:2019/users/avatar/${this.props.user.avatar}`} alt="Profile Picture" key={new Date()} />
+                           </Card>
+                        </Col>
+                        <Col sm="6">
+                        <Card body>
+                        <h5 class="card-title">Change Profile Picture</h5>
+                           <form>
+                              <div class="form-group">
+                                 <input type="file" class="form-control-file" id="exampleFormControlFile1" ref={input => this.avatar = input} />
+                              </div>
+                           </form>
+                           <button className='btn btn-danger' onClick={this.onUpdateAvatar}>Update Profile Picture</button>
+                           </Card>
+                        </Col>
+                     </Row>
                   </div>
                   <Footer />
                </div>

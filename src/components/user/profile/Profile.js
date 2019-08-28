@@ -21,7 +21,7 @@ class Profile extends Component {
                <div>
                   <Header />
                   <div className='container' style={{ marginTop: 80 }}>
-                  <Row>
+                     <Row>
                         <Col sm="6">
                            <Card body>
                               <CardImg top width="100%" src={defaultAvatar} alt="Profile Picture" key={new Date()} />
@@ -31,11 +31,11 @@ class Profile extends Component {
                         <Col sm="6">
                            <Card body>
                               <CardTitle>
-                              <div className="input-group">
+                                 <div className="input-group">
                                     <div className="input-group-prepend">
                                        <span className="input-group-text" id="inputGroup-sizing-default">Name: </span>
                                     </div>
-                                    <input type="text" className="form-control" defaultValue={this.props.user.first_name.concat(' ' + this.props.user.last_name)} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled/>
+                                    <input type="text" className="form-control" defaultValue={this.props.user.first_name.concat(' ' + this.props.user.last_name)} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled />
                                  </div>
                               </CardTitle>
                               <CardText>
@@ -43,31 +43,31 @@ class Profile extends Component {
                                     <div className="input-group-prepend">
                                        <span className="input-group-text" id="inputGroup-sizing-default">@</span>
                                     </div>
-                                    <input type="text" className="form-control" defaultValue={this.props.user.username} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled/>
+                                    <input type="text" className="form-control" defaultValue={this.props.user.username} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled />
                                  </div>
                               </CardText>
                               <CardText>
-                              <div className="input-group">
+                                 <div className="input-group">
                                     <div className="input-group-prepend">
                                        <span className="input-group-text" id="inputGroup-sizing-default">Email: </span>
                                     </div>
-                                    <input type="text" className="form-control" defaultValue={this.props.user.email} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled/>
+                                    <input type="text" className="form-control" defaultValue={this.props.user.email} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled />
                                  </div>
                               </CardText>
                               <CardText>
-                              <div className="input-group">
+                                 <div className="input-group">
                                     <div className="input-group-prepend">
                                        <span className="input-group-text" id="inputGroup-sizing-default">Gender: </span>
                                     </div>
-                                    <input type="text" className="form-control" defaultValue={this.props.user.gender} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled/>
+                                    <input type="text" className="form-control" defaultValue={this.props.user.gender} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled />
                                  </div>
                               </CardText>
                               <CardText>
-                              <div className="input-group">
+                                 <div className="input-group">
                                     <div className="input-group-prepend">
                                        <span className="input-group-text" id="inputGroup-sizing-default">Address: </span>
                                     </div>
-                                    <input type="text" className="form-control" defaultValue={this.props.user.address} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled/>
+                                    <input type="text" className="form-control" defaultValue={this.props.user.address} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled />
                                  </div>
                               </CardText>
                               <Link to='/editprofile'><Button color='outline-danger mt-3' block>Edit Profile</Button></Link>
@@ -95,11 +95,11 @@ class Profile extends Component {
                         <Col sm="6">
                            <Card body>
                               <CardTitle>
-                              <div className="input-group">
+                                 <div className="input-group">
                                     <div className="input-group-prepend">
                                        <span className="input-group-text" id="inputGroup-sizing-default">Name: </span>
                                     </div>
-                                    <input type="text" className="form-control" defaultValue={this.props.user.first_name.concat(' ' + this.props.user.last_name)} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled/>
+                                    <input type="text" className="form-control" defaultValue={this.props.user.first_name.concat(' ' + this.props.user.last_name)} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled />
                                  </div>
                               </CardTitle>
                               <CardText>
@@ -107,31 +107,31 @@ class Profile extends Component {
                                     <div className="input-group-prepend">
                                        <span className="input-group-text" id="inputGroup-sizing-default">@</span>
                                     </div>
-                                    <input type="text" className="form-control" defaultValue={this.props.user.username} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled/>
+                                    <input type="text" className="form-control" defaultValue={this.props.user.username} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled />
                                  </div>
                               </CardText>
                               <CardText>
-                              <div className="input-group">
+                                 <div className="input-group">
                                     <div className="input-group-prepend">
                                        <span className="input-group-text" id="inputGroup-sizing-default">Email: </span>
                                     </div>
-                                    <input type="text" className="form-control" defaultValue={this.props.user.email} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled/>
+                                    <input type="text" className="form-control" defaultValue={this.props.user.email} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled />
                                  </div>
                               </CardText>
                               <CardText>
-                              <div className="input-group">
+                                 <div className="input-group">
                                     <div className="input-group-prepend">
                                        <span className="input-group-text" id="inputGroup-sizing-default">Gender: </span>
                                     </div>
-                                    <input type="text" className="form-control" defaultValue={this.props.user.gender} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled/>
+                                    <input type="text" className="form-control" defaultValue={this.props.user.gender} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled />
                                  </div>
                               </CardText>
                               <CardText>
-                              <div className="input-group">
+                                 <div className="input-group">
                                     <div className="input-group-prepend">
                                        <span className="input-group-text" id="inputGroup-sizing-default">Address: </span>
                                     </div>
-                                    <input type="text" className="form-control" defaultValue={this.props.user.address} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled/>
+                                    <input type="text" className="form-control" defaultValue={this.props.user.address} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled />
                                  </div>
                               </CardText>
                               <Link to='/editprofile'><Button color='outline-danger mt-3' block>Edit Profile</Button></Link>

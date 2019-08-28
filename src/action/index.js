@@ -82,6 +82,14 @@ export const editProfile = (id, firstName, lastName, email, gender, address) => 
          })
 
          cookie.set('motokaUser', { id, first_name, last_name, username, email, gender, avatar, address }, { path: '/' })
+
+         Swal.fire({
+            position: `center`,
+            type: `success`,
+            title: `Update Success!`,
+            showConfirmButton: false,
+            timer: 1500
+         })
       })
    }
 }

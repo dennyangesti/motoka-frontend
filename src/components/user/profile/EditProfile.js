@@ -36,36 +36,84 @@ class EditProfile extends Component {
          return (
             <div>
                <Header />
-               <div className='container'>
-                  <div className="row my-4">
-                     <div class="card col-sm-12 col-md-6 col-lg-7">
+               <div className='container '>
+                  <div className='mb-4' style={{ marginTop: 80 }}>
+                     <div class="card text-center">
+                        <div class="card-header">Edit Profile</div>
                         <div class="card-body">
-                           <h2 className='mb-4'>Edit Profile</h2>
-                           <form>
-                              <div className="input-group">
-                                 <input type="text" className="form-control" defaultValue={this.props.user.first_name} placeholder='*First Name' ref={(firstName) => { this.firstName = firstName }} />
-                                 <input type="text" className="form-control" defaultValue={this.props.user.last_name} placeholder='Last Name' ref={(lastName) => { this.lastName = lastName }} />
+                           <h5 class="card-title">
+
+                              <div className="input-group mb-2">
+                                 <div className="input-group-prepend">
+                                    <span className="input-group-text" id="inputGroup-sizing-default">Name: </span>
+                                 </div>
+                                 <input type="text" className="form-control" defaultValue={this.props.user.first_name.concat(' ' + this.props.user.last_name)} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled />
                               </div>
 
-                              <form className='input-group mt-3'>
-                                 <input className='form-control' placeholder='*Email' type="email" defaultValue={this.props.user.email}
-                                    ref={(email) => { this.email = email }}></input>
-                              </form>
+                              <div className="input-group mb-3">
+                                 <div className="input-group-prepend">
+                                    <span className="input-group-text" id="inputGroup-sizing-default">@</span>
+                                 </div>
+                                 <input type="text" className="form-control" defaultValue={this.props.user.username} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled />
+                              </div>
 
+                           </h5>
 
-                              <form className='input-group my-3'>
-                                 <input className='form-control' placeholder='Address' defaultValue={this.props.user.address}
-                                    ref={(address) => { this.address = address }}></input>
-                              </form>
+                           <form>
 
+                              <p class="card-text mb-2">
+                                 <div className="input-group">
+                                    <div className="input-group-prepend">
+                                       <span className="input-group-text" id="inputGroup-sizing-default">First Name: </span>
+                                    </div>
+                                    <input type="text" className="form-control" defaultValue={this.props.user.first_name} placeholder='*First Name' ref={(firstName) => { this.firstName = firstName }} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                                 </div>
+                              </p>
+
+                           </form>
+                           <form>
+                              <p class="card-text mb-2">
+                                 <div className="input-group">
+                                    <div className="input-group-prepend">
+                                       <span className="input-group-text" id="inputGroup-sizing-default">Last Name: </span>
+                                    </div>
+                                    <input type="text" className="form-control" defaultValue={this.props.user.last_name} placeholder='Last Name' ref={(lastName) => { this.lastName = lastName }} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                                 </div>
+                              </p>
+                           </form>
+                           <form>
+                              <p class="card-text mb-2">
+                                 <div className="input-group">
+                                    <div className="input-group-prepend">
+                                       <span className="input-group-text" id="inputGroup-sizing-default">Email: </span>
+                                    </div>
+                                    <input type="text" className="form-control" defaultValue={this.props.user.email} ref={(email) => { this.email = email }} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                                 </div>
+                              </p>
+                           </form>
+                           <form>
+                              <p class="card-text mb-2">
+                                 <div className="input-group">
+                                    <div className="input-group-prepend">
+                                       <span className="input-group-text" id="inputGroup-sizing-default">Address: </span>
+                                    </div>
+                                    <input type="text" className="form-control" defaultValue={this.props.user.address} ref={(address) => { this.address = address }} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                                 </div>
+                              </p>
+
+                           </form>
+                           <form>
                               <div class="input-group mb-3">
-                                 <select class="custom-select" id="inputGroupSelect01" ref={input => this.gender = input} defaultValue={this.props.user.gender}>
-                                    <option value="Male">Male</option>
+                                 <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Gender: </label>
+                                 </div>
+                                 <select class="custom-select" id="inputGroupSelect01" ref={input => this.gender = input} defaultValue={this.props.user.gender}>>
+                              <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                  </select>
                               </div>
                            </form>
-                           <button className='btn btn-primary mt-3' onClick={this.onEditProfile}>Update Profile</button>
+                           <button className='btn btn-danger mt-3 btn-block' onClick={this.onEditProfile}>Update Profile</button>
                         </div>
                      </div>
                   </div>
