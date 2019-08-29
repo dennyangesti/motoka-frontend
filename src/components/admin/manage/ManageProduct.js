@@ -286,7 +286,7 @@ class ManageProduct extends Component {
                         <td>{item.product_name}</td>
                         <td>{brandMap.brand_name}</td>
                         <td>{item.description}</td>
-                        <td>{item.price.toLocaleSting('IN')}</td>
+                        <td>{item.price}</td>
                         <td>{item.stock}</td>
                         <td>
                            <input type='file' ref={input => { this.image = input }} />

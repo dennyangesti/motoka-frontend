@@ -13,7 +13,6 @@ import DetailProduct from './user/product/DetailProduct'
 import Cart from './user/transaction/Cart'
 
 import Product from './user/product/Product'
-import Products from './user/product/Products'
 import AboutPage from './user/about/AboutPage'
 import Contact from './user/about/Contact'
 
@@ -55,7 +54,6 @@ class App extends Component {
                <Route path="/register" component={Register} /> {/* include()  */}
                <Route path="/login" component={Login} /> {/* include()  */}
                <Route path='/product' component={Product} />
-               <Route path='/products' component={Products} />
                <Route path="/detailproduct" component={DetailProduct} />
                <Route path="/profile" component={Profile} />
                <Route path="/editprofile" component={EditProfile} />

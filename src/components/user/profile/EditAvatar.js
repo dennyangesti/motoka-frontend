@@ -38,9 +38,9 @@ class ChangeAvatar extends Component {
                      <Row>
                         <Col sm="6">
                            <Card body>
-                           <div className='text-center'>
-               <img style={{width: 350}} src={`http://localhost:2019/users/avatar/${this.props.user.avatar}`} alt="Profile Picture" key={new Date()} />
-               </div>
+                              <div className='text-center'>
+                                 <img style={{ width: 350 }} src={defaultAvatar} alt="Profile Picture" key={new Date()} />
+                              </div>
                            </Card>
                         </Col>
                         <Col sm="6">
@@ -67,9 +67,9 @@ class ChangeAvatar extends Component {
                      <Row>
                         <Col sm="6">
                            <Card body>
-               <div className='text-center'>
-               <img style={{width: 350}} src={`http://localhost:2019/users/avatar/${this.props.user.avatar}`} alt="Profile Picture" key={new Date()} />
-               </div>
+                              <div className='text-center'>
+                                 <img style={{ width: 350 }} src={`http://localhost:2019/users/avatar/${this.props.user.avatar}`} alt="Profile Picture" key={new Date()} />
+                              </div>
                            </Card>
                         </Col>
                         <Col sm="6">
