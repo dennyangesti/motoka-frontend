@@ -24,8 +24,14 @@ class Profile extends Component {
                      <Row>
                         <Col sm="6">
                            <Card body>
-                              <CardImg top width="100%" src={defaultAvatar} alt="Profile Picture" key={new Date()} />
-                              <Link to='/editavatar'><Button color='danger' block>Edit Avatar</Button></Link>
+                           <div className='text-center'>
+                           <CardImg top style={{width: 300}} src={defaultAvatar} alt="Profile Picture" key={new Date()} />
+                           </div>
+                              <Link to='/editavatar'>
+                                 <div className='d-flex justify-content-center'>
+                                 <Button color='danger' style={{width: 350}} block>Edit Avatar</Button>
+                                 </div>
+                              </Link>
                            </Card>
                         </Col>
                         <Col sm="6">
@@ -88,8 +94,14 @@ class Profile extends Component {
                      <Row>
                         <Col sm="6">
                            <Card body>
-                              <CardImg top width="100%" src={`http://localhost:2019/users/avatar/${this.props.user.avatar}`} alt="Profile Picture" key={new Date()} />
-                              <Link to='/editavatar'><Button color='danger' block>Edit Avatar</Button></Link>
+                           <div className='text-center'>
+                           <CardImg top style={{width: 350}} src={`http://localhost:2019/users/avatar/${this.props.user.avatar}`} alt="Profile Picture" key={new Date()} />
+                           </div>
+                              <Link to='/editavatar'>
+                                 <div className='d-flex justify-content-center'>
+                                 <Button color='danger' style={{width: 350}} block>Edit Avatar</Button>
+                                 </div>
+                              </Link>
                            </Card>
                         </Col>
                         <Col sm="6">

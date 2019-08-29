@@ -250,7 +250,7 @@ class ManageProduct extends Component {
                               <td>{item.product_name}</td>
                               <td>{brandMap.brand_name}</td>
                               <td>{item.description}</td>
-                              <td>{item.price}</td>
+                              <td>{item.price.toLocaleString('IN')}</td>
                               <td>{item.stock}</td>
                               <td>
                                  <img className='list' alt='' onClick={() => { this.setState({ upload: item.id }) }} style={{ width: 100 }} src={`http://localhost:2019/products/avatar/${item.image}`} />
@@ -268,7 +268,7 @@ class ManageProduct extends Component {
                            <td>{item.product_name}</td>
                            <td>{brandMap.brand_name}</td>
                            <td>{item.description}</td>
-                           <td>{item.price}</td>
+                           <td>{item.price.toLocaleString('IN')}</td>
                            <td>{item.stock}</td>
                            <td>
                               <button onClick={() => { this.setState({ upload: item.id }) }}>Upload</button>
@@ -286,7 +286,7 @@ class ManageProduct extends Component {
                         <td>{item.product_name}</td>
                         <td>{brandMap.brand_name}</td>
                         <td>{item.description}</td>
-                        <td>{item.price}</td>
+                        <td>{item.price.toLocaleSting('IN')}</td>
                         <td>{item.stock}</td>
                         <td>
                            <input type='file' ref={input => { this.image = input }} />
@@ -298,9 +298,7 @@ class ManageProduct extends Component {
                      </tr>
                   )
                }
-
-            }
-            )
+            })
          } else {
             return (
                <tr>
@@ -318,7 +316,7 @@ class ManageProduct extends Component {
                      <input className="form-control" ref={input => { this.editDescription = input }} type="text" defaultValue={item.description} />
                   </td>
                   <td>
-                     <input className="form-control" ref={input => { this.editPrice = input }} type="text" defaultValue={item.price} />
+                     <input className="form-control" ref={input => { this.editPrice = input }} type="text" defaultValue={item.price.toLocaleString('IN')} />
                   </td>
                   <td>
                      <input className="form-control" ref={input => { this.editStock = input }} type="text" defaultValue={item.stock} />

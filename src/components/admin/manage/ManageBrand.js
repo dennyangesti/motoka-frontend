@@ -12,7 +12,8 @@ class ManageBrand extends Component {
    state = {
       brands: [],
       edit: 0,
-      input: 0
+      input: 0,
+      upload: 0
    }
 
    componentDidMount() {
@@ -22,7 +23,7 @@ class ManageBrand extends Component {
    getBrands = () => {
       axios.get('http://localhost:2019/brands')
          .then(res => {
-            this.setState({ brands: res.data, edit: 0, input: 0 })
+            this.setState({ brands: res.data, edit: 0, input: 0, upload: 0 })
             console.log(res.data);
 
          })
@@ -91,6 +92,20 @@ class ManageBrand extends Component {
          })
    }
 
+   onUploadImg = (id) => {
+      const formData = new FormData()
+      const brand_image = this.image.files[0]
+
+      formData.append('brand', brand_image)
+      formData.append('id', id)
+
+      axios.post('http://localhost:2019/brand/image/', formData
+      ).then(res => {
+         this.getBrands()
+         console.log(res.data)
+      })
+   }
+
    onEnter = (enter) => {
       enter.preventDefault()
 
@@ -114,15 +129,48 @@ class ManageBrand extends Component {
    }
 
    renderList = () => {
-      return this.state.brands.map(item => { // {id, name}
+      return this.state.brands.map(item => { // {id, name, image}
          if (item.id !== this.state.edit) {
+            if (item.id !== this.state.upload) {
+               if (item.brand_image) {
+                  return (
+                     <tr>
+                        <td>{item.id}</td>
+                        <td>{item.brand_name}</td>
+                        <td>
+                           <img className='list' alt='' onClick={() => { this.setState({ upload: item.id }) }} style={{ width: 50 }} src={`http://localhost:2019/brand/avatar/${item.brand_image}`} />
+                        </td>
+                        <td>
+                           <Button color="danger" onClick={() => { this.setState({ edit: item.id }) }}>Edit</Button>
+                           <button className='btn btn-warning m-1' onClick={() => { this.onDeleteItem(item) }}>Delete</button>
+                        </td>
+                     </tr>
+                  )
+               }
+               return (
+                  <tr>
+                     <td>{item.id}</td>
+                     <td>{item.brand_name}</td>
+                     <td>
+                        <button onClick={() => { this.setState({ upload: item.id }) }}>Upload</button>
+                     </td>
+                     <td>
+                        <Button color="danger" onClick={() => { this.setState({ edit: item.id }) }}>Edit</Button>
+                        <button className='btn btn-warning m-1' onClick={() => { this.onDeleteItem(item) }}>Delete</button>
+                     </td>
+                  </tr>
+               )
+            }
             return (
                <tr>
                   <td>{item.id}</td>
                   <td>{item.brand_name}</td>
                   <td>
-                     <Button color="danger" onClick={() => { this.setState({ edit: item.id }) }}>Edit</Button>
-                     <button className='btn btn-warning m-1' onClick={() => { this.deleteBrand(item) }}>Delete</button>
+                     <input type='file' ref={input => { this.image = input }} />
+                  </td>
+                  <td>
+                     <button className='btn btn-danger m-1' onClick={() => { this.onUploadImg(item.id) }}>Save</button>
+                     <button className='btn btn-warning m-1' onClick={() => { this.setState({ upload: 0 }) }}>Cancel</button>
                   </td>
                </tr>
             )
@@ -162,6 +210,7 @@ class ManageBrand extends Component {
                                  <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">BRAND NAME</th>
+                                    <th scope="col">PICTURE</th>
                                     <th scope="col">ACTION</th>
                                  </tr>
                               </thead>
