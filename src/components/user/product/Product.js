@@ -38,6 +38,46 @@ class Product extends Component {
          })
    }
 
+   onSearch = () => {
+      const name = this.valname.value
+      const max = parseInt(this.max.value)
+      const min = parseInt(this.min.value)
+
+      var filterSearch = this.state.searchProduct.filter(item => {
+         if (isNaN(min) && isNaN(max)) { // Search by Name
+            return (
+               item.product_name.toLowerCase().includes(name.toLowerCase())
+            )
+         } else if (isNaN(min)) { // Name and Max
+            return (
+               item.product_name.toLowerCase().includes(name.toLowerCase())
+               &&
+               item.price <= max
+            )
+         } else if (isNaN(max)) { // Name and Max
+            return (
+               item.product_name.toLowerCase().includes(name.toLowerCase())
+               &&
+               item.price >= min
+            )
+         } else if (item.price <= max && item.price >= min) {
+            return (
+               item.product_name.toLowerCase().includes(name.toLowerCase())
+               &&
+               (item.price <= max && item.price >= min)
+            )
+         }
+      })
+
+      this.setState({ productState: filterSearch })
+   }
+
+   onEnter = (enter) => {
+      enter.preventDefault()
+
+      this.onSearch()
+   }
+
    renderBrands = () => {
       return this.state.productState.map(item => {
          if (item.brand_id === this.state.brandState) {
@@ -66,7 +106,7 @@ class Product extends Component {
 
       return (
          <div>
-            <div className="row">
+            <div>
                {this.renderBrands()}
             </div>
          </div>
@@ -78,7 +118,7 @@ class Product extends Component {
          <div>
             <Header />
             <div className='container' style={{ marginTop: '80px' }}>
-               <div className="row d-flex justify-content-between position-sticky mb-3">
+               <div className="row d-flex justify-content-between mb-3">
                   <div onClick={() => this.setState({ brandState: 0, productState: this.state.searchProduct })}>
                      <h5 className="mt-2 text-secondary">All</h5>
                   </div>
@@ -134,7 +174,23 @@ class Product extends Component {
                      <img src={require('../../../image/logo/logo/fix/bmw.png')} alt="Generic placeholder" width="35" height="35" />
                   </div>
                </div>
-               {this.renderList()}
+               <div>
+                  <div class="input-group ">
+                     <div class="input-group-prepend">
+                        <span class="input-group-text bg-dark text-white" id="basic-addon1">Product Name</span>
+                     </div>
+                     <form onInput={enter => this.onEnter(enter)}>
+                        <input type="text" class="form-control" ref={input => { this.valname = input }} placeholder="Search by Product Name" aria-describedby="basic-addon1" />
+                     </form>
+                     <div class="input-group-prepend">
+                        <span class="input-group-text ml-2 bg-dark text-white" id="basic-addon1">Price</span>
+                     </div>
+                     <input type="text" class="form-control" ref={input => { this.min = input }} placeholder="Search by Min Price" aria-describedby="basic-addon1" />
+                     <input type="text" class="form-control" ref={input => { this.max = input }} placeholder="Search by Max Price" aria-describedby="basic-addon1" />
+                     <button className='btn btn-danger ml-2' onClick={this.onSearch}>Search</button>
+                  </div>
+                  {this.renderList()}
+               </div>
             </div>
             <Footer />
          </div>

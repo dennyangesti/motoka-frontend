@@ -1,45 +1,136 @@
 import React, { Component } from 'react'
-import { Card, Button, CardTitle, CardImg, CardText, Row, Col, Table } from 'reactstrap';
+import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import Swal from 'sweetalert2'
+import { Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 
 import Header from '../header/Header'
 import Footer from '../../Footer'
 
 class Cart extends Component {
-   renderlist = () => {
-      return (
-         <Table borderless>
-            <thead>
-               <tr>
-                  <th></th>
-                  <th>Product Name</th>
-                  <th>Product Price</th>
-                  <th>Quantity</th>
-                  <th>Action</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-               </tr>
-               <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-               </tr>
-               <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-               </tr>
-            </tbody>
-         </Table>
-      )
+   state = {
+      cartState: [],
+      productState: [],
+      cartSubTotal: 0,
+      cartTotal: 0
+   }
+
+   componentDidMount() {
+      this.getProduct()
+      this.getCart()
+   }
+
+   getProduct = () => {
+      axios.get('http://localhost:2019/products')
+         .then(res => {
+            this.setState({ productState: res.data })
+            console.log(res.data);
+         })
+   }
+
+   getCart = () => {
+      axios.get('http://localhost:2019/carts')
+         .then(res => {
+            this.setState({ cartState: res.data })
+            console.log(res.data);
+         })
+   }
+
+   deleteCart = (id) => {
+      axios.delete(`http://localhost:2019/carts/${id}`
+      ).then(res => {
+         console.log(res.data)
+         this.getCart()
+      })
+   }
+
+   addQuantity = (productState, cartState) => {
+      const user_id = this.props.user.id
+      const { product_id } = cartState
+      const { stock } = productState
+
+
+      axios.get(`http://localhost:2019/carts/${user_id}/${product_id}`
+      ).then(res => {
+
+         const totalQuantity = parseInt(res.data[0].quantity) + 1
+         console.log(res.data)
+
+         if (totalQuantity <= stock) {
+            axios.patch(`http://localhost:2019/carts/${res.data[0].id}`,
+               {
+                  quantity: totalQuantity
+               }).then(res => {
+                  this.getCart()
+                  console.log(res.data)
+               })
+         } else {
+            Swal.fire({
+               type: 'error',
+               title: 'Oops...',
+               text: 'Sorry, this item is soldout',
+            })
+         }
+      })
+   }
+
+   minQuantity = (cartState) => {
+      const user_id = this.props.user.id
+      const { product_id } = cartState
+
+
+      axios.get(`http://localhost:2019/carts/${user_id}/${product_id}`
+      ).then(res => {
+         const totalQuantity = parseInt(res.data[0].quantity) - 1
+         console.log(res.data)
+
+         if (totalQuantity === 0) {
+            axios.delete(`http://localhost:2019/carts/${res.data[0].id}`,
+               {
+                  quantity: totalQuantity
+               }).then(res => {
+                  this.getCart()
+                  console.log(res.data)
+               })
+         } else {
+            axios.patch(`http://localhost:2019/carts/${res.data[0].id}`,
+               {
+                  quantity: totalQuantity
+               }).then(res => {
+                  this.getCart()
+                  console.log(res.data)
+               })
+         }
+      })
+   }
+
+
+
+   renderList = () => {
+      return this.state.productState.map(item => {
+         return this.state.cartState.map(cart => {
+            if (cart.user_id === this.props.user.id) {
+               if (item.id === cart.product_id) {
+                  const total = item.price * cart.quantity
+                  return (
+                     <tr>
+                        <td>{item.image}</td>
+                        <td>{item.product_name}</td>
+                        <td>Rp. {item.price.toLocaleString('IN')}</td>
+                        <td>{cart.quantity}</td>
+                        <td>Rp. {total.toLocaleString("IN")}</td>
+                        <td className='d-flex justify-content-between'>
+                           <img src={require('../../../image/minus.png')} alt='minus' onClick={() => { this.minQuantity(cart) }} />
+                           <img src={require('../../../image/plus.png')} alt='plus' onClick={() => { this.addQuantity(item, cart) }} />
+                           <img src={require('../../../image/x.png')} alt='delete' width='16' src='https://image.flaticon.com/icons/svg/291/291202.svg' onClick={() => { this.deleteCart(cart.id) }} />
+                        </td>
+                     </tr>
+                  )
+               }
+            }
+         })
+      })
    }
 
    render() {
@@ -53,44 +144,22 @@ class Cart extends Component {
                         <CardTitle className='display-4 m-1 p-1 text-uppercase text-center'>Cart</CardTitle>
                      </Card>
                      <Card>
-                        <Row className='m-1 p-1 border-bottom'>
-                           <Col sm='4'>
-                              <CardImg className='img-thumbnail' top width='100%' src={require('../../../image/product/ferrari/monza-sp2-5.jpg')} alt='' />
-                           </Col>
-                           <Col>
-                              {this.renderlist}
-                           </Col>
-                        </Row>
-                        <Row className='m-1 p-1 border-bottom'>
-                           <Col sm='4'>
-                              <CardImg className='img-thumbnail' top width='100%' src={require('../../../image/product/ferrari/monza-sp2-5.jpg')} alt='' />
-                           </Col>
-                           <Col>
-                              <CardText>Product Name</CardText>
-                              <CardText>IDR. Product Price</CardText>
-                              <CardText>Product Quantity</CardText>
-                           </Col>
-                        </Row>
-                        <Row className='m-1 p-1 border-bottom'>
-                           <Col sm='4'>
-                              <CardImg className='img-thumbnail' top width='100%' src={require('../../../image/product/ferrari/monza-sp2-5.jpg')} alt='' />
-                           </Col>
-                           <Col>
-                              <CardText>Product Name</CardText>
-                              <CardText>IDR. Product Price</CardText>
-                              <CardText>Product Quantity</CardText>
-                           </Col>
-                        </Row>
-                        <Row className='m-1 p-1 border-bottom'>
-                           <Col sm='4'>
-                              <CardImg className='img-thumbnail' top width='100%' src={require('../../../image/product/ferrari/monza-sp2-5.jpg')} alt='' />
-                           </Col>
-                           <Col>
-                              <CardText>Product Name</CardText>
-                              <CardText>IDR. Product Price</CardText>
-                              <CardText>Product Quantity</CardText>
-                           </Col>
-                        </Row>
+                        <table class="table table-borderless mt-3">
+                           <thead>
+                              <tr>
+                                 <th scope="col">Image</th>
+                                 <th scope="col">Name</th>
+                                 <th scope="col">Price</th>
+                                 <th scope="col">Quantity</th>
+                                 <th scope="col">Total</th>
+                                 <th scope="col">Action</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+
+                              {this.renderList()}
+                           </tbody>
+                        </table>
                      </Card>
                   </Col>
                   <Col sm="4">
@@ -98,7 +167,7 @@ class Cart extends Component {
                         <CardTitle className='h2 border-bottom m-1 p-1 text-uppercase'>Total</CardTitle>
                         <div className='justify-content-between row m-1 p-1'>
                            <CardText>Sub-total</CardText>
-                           <CardText>IDR Total</CardText>
+                           <CardText>IDR {this.renderTotal()}</CardText>
                         </div>
                         <Link to='/'>
                            <Button className='btn btn-success w-100'>
@@ -116,4 +185,11 @@ class Cart extends Component {
    }
 }
 
-export default Cart
+
+const mapStateToProps = state => {
+   return {
+      user: state.auth
+   }
+}
+
+export default connect(mapStateToProps)(Cart)

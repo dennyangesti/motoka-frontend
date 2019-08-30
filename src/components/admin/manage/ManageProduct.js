@@ -379,7 +379,7 @@ class ManageProduct extends Component {
                               <div className='container'>
                                  <div className='d-flex justify-content-between'>
                                     <div>
-                                       <Form inline onSubmit={enter => this.onEnter(enter)}>
+                                       <Form inline onInput={enter => this.onEnter(enter)}>
                                           {/* <FormGroup className="m-0 p-0"> */}
                                           <Label for='product' className='mr-2'>Product Name: </Label>
                                           <input id='product' className='form-control' placeholder="Search Product by Name" ref={input => { this.name = input }} />
@@ -394,7 +394,7 @@ class ManageProduct extends Component {
                                        <Button color='danger' onClick={this.resetFilter}>Reset Filter</Button>
                                     </div>
                                     <div>
-                                       <Form inline onSubmit={enter => this.onEnter(enter)}>
+                                       <Form inline onInput={enter => this.onEnter(enter)}>
                                           {/* <FormGroup className="m-0 p-0"> */}
                                           <Label for='brandid' className='mr-2'>Brand Name: </Label>
                                           <input id='brandid' className='form-control' placeholder="Search Brand by Name" ref={input => { this.brandInput = input }} />
@@ -457,7 +457,7 @@ class ManageProduct extends Component {
                            <div className='container'>
                               <div className='d-flex justify-content-between'>
                                  <div>
-                                    <Form inline onSubmit={enter => this.onEnter(enter)}>
+                                    <Form inline onInput={enter => this.onEnter(enter)}>
                                        {/* <FormGroup className="m-0 p-0"> */}
                                        <Label for='product' className='mr-2'>Product Name: </Label>
                                        <input id='product' className='form-control' placeholder="Search Product by Name" ref={input => { this.name = input }} />
@@ -469,7 +469,7 @@ class ManageProduct extends Component {
                                     <button className="btn btn-warning" onClick={() => this.setState({ input: !this.state.input })}>Add Product</button>
                                  </div>
                                  <div>
-                                    <Form inline onSubmit={enter => this.onEnter(enter)}>
+                                    <Form inline onInput={enter => this.onEnter(enter)}>
                                        {/* <FormGroup className="m-0 p-0"> */}
                                        <Label for='brandid' className='mr-2'>Brand Name: </Label>
                                        <input id='brandid' className='form-control' placeholder="Search Brand by Name" ref={input => { this.brandInput = input }} />
