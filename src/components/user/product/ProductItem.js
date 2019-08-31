@@ -110,7 +110,7 @@ class ProductItem extends Component {
                      <p className="card-text"><small className="text-white">{description}</small></p>
                      <input className="form-control" ref={input => { this.quantity = input }} type="text" defaultValue='0' />
                      <button className='btn btn-danger btn-block' onClick={() => { this.addToCart(this.props.items) }}>Add to Cart</button>
-                     <button className='btn btn-outline-danger  btn-block text-white mt-4'>See Details</button>
+                     {/* <button className='btn btn-outline-danger  btn-block text-white mt-4'>See Details</button> */}
                   </div>
                </div>
             </div>

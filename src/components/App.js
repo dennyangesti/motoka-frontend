@@ -9,7 +9,6 @@ import Register from './user/auth/Register'
 import Profile from './user/profile/Profile'
 import EditProfile from './user/profile/EditProfile'
 import EditAvatar from './user/profile/EditAvatar'
-import DetailProduct from './user/product/DetailProduct'
 import Cart from './user/transaction/Cart'
 
 import Product from './user/product/Product'
@@ -22,6 +21,7 @@ import ManageProduct from './admin/manage/ManageProduct'
 import ManageBrand from './admin/manage/ManageBrand'
 
 import { keepLogin, keepLoginAdmin } from '../action/index'
+import Checkout from './user/transaction/Checkout';
 
 
 const cookie = new cookies()
@@ -54,12 +54,11 @@ class App extends Component {
                <Route path="/register" component={Register} /> {/* include()  */}
                <Route path="/login" component={Login} /> {/* include()  */}
                <Route path='/product' component={Product} />
-               <Route path="/detailproduct" component={DetailProduct} />
                <Route path="/profile" component={Profile} />
                <Route path="/editprofile" component={EditProfile} />
                <Route path="/editavatar" component={EditAvatar} />
-               {/* <Route path="/detailproduct/:product_id" component={DetailProduct} /> */}
                <Route path="/cart" component={Cart} />
+               <Route path="/checkout" component={Checkout} />
                <Route path='/about' component={AboutPage} />
                <Route path='/contact' component={Contact} />
             </div>

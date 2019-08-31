@@ -43,13 +43,13 @@ class HeaderAdmin extends Component {
    render() {
 
       // Render sebelum login
-      if (this.props.admin.username === '') {
+      if (this.props.admin.id === '') {
 
          return (
             <div className='d-inline-flex'>
                <nav className="navbar navbar-expand-lg text-white fixed-top mt-1" style={{ backgroundColor: 'black' }}>
                   <div className="container text-uppercase">
-                     <Link to='/admin'><h1 className="navbar-brand text-danger font-weight-bold">GET<span className='text-white font-weight-normal'>Motoka</span></h1></Link>
+                     <Link to='/'><h1 className="navbar-brand text-danger font-weight-bold">GET<span className='text-white font-weight-normal'>Motoka</span></h1></Link>
                      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                      </button>
@@ -72,7 +72,7 @@ class HeaderAdmin extends Component {
          <div className='d-inline-flex p-0'>
             <nav className="navbar navbar-expand-lg text-white fixed-top" style={{ backgroundColor: 'black' }}>
                <div className="container text-uppercase">
-                  <Link to='/admin'><h1 className="navbar-brand text-danger font-weight-bold mt-1">GET<span className='text-white font-weight-normal'>Motoka</span></h1></Link>
+                  <Link to='/'><h1 className="navbar-brand text-danger font-weight-bold mt-1">GET<span className='text-white font-weight-normal'>Motoka</span></h1></Link>
                   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                      <span className="navbar-toggler-icon"></span>
                   </button>

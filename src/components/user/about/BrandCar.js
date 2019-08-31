@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class BrandCar extends Component {
 
@@ -22,9 +23,11 @@ class BrandCar extends Component {
                <div className='col-2 text-center mt-4'>
                   <img src="https://i.ibb.co/dKtFXdn/logo-5.png" alt='logo-brand' />
                </div>
-               <div className='col-2 text-center'>
-                  <img src="https://i.ibb.co/b5vtVBg/logo-6.png" alt='logo-brand' />
-               </div>
+               <Link to='/admin'>
+                  <div className='col-2 text-center'>
+                     <img src="https://i.ibb.co/b5vtVBg/logo-6.png" alt='logo-brand' />
+                  </div>
+               </Link>
             </div>
          </div>
       )

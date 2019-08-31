@@ -68,8 +68,8 @@ class Cart extends Component {
          } else {
             Swal.fire({
                type: 'error',
-               title: 'Oops...',
-               text: 'Sorry, this item is soldout',
+               title: 'Our stock is not enough',
+               text: `Sorry, our stock is only ${res.data[0].quantity} items`,
             })
          }
       })
@@ -105,7 +105,23 @@ class Cart extends Component {
       })
    }
 
+   onTotal = () => {
+      let subTotal = 0
 
+      for (let i = 0; i < this.state.cartState.length; i++) {
+         if (this.state.cartState[i].user_id === this.props.user.id) {
+            for (let x = 0; x < this.state.productState.length; x++) {
+               if (this.state.cartState[i].product_id === this.state.productState[x].id) {
+                  const total = this.state.cartState[i].quantity * this.state.productState[x].price
+                  subTotal += total
+
+               }
+            }
+         }
+      }
+
+      return subTotal.toLocaleString('IN')
+   }
 
    renderList = () => {
       return this.state.productState.map(item => {
@@ -115,16 +131,15 @@ class Cart extends Component {
                   const total = item.price * cart.quantity
                   return (
                      <tr>
-                        <td>{item.image}</td>
+                        <td> <img src={`http://localhost:2019/products/avatar/${item.image}`} className="card-img" style={{ width: 200 }} alt="..." /></td>
                         <td>{item.product_name}</td>
                         <td>Rp. {item.price.toLocaleString('IN')}</td>
-                        <td>{cart.quantity}</td>
-                        <td>Rp. {total.toLocaleString("IN")}</td>
-                        <td className='d-flex justify-content-between'>
-                           <img src={require('../../../image/minus.png')} alt='minus' onClick={() => { this.minQuantity(cart) }} />
-                           <img src={require('../../../image/plus.png')} alt='plus' onClick={() => { this.addQuantity(item, cart) }} />
-                           <img src={require('../../../image/x.png')} alt='delete' width='16' src='https://image.flaticon.com/icons/svg/291/291202.svg' onClick={() => { this.deleteCart(cart.id) }} />
+                        <td>
+                           <img className='mr-3' src={require('../../../image/minus.png')} alt='minus' onClick={() => { this.minQuantity(cart) }} />
+                           {cart.quantity}
+                           <img className='ml-3' src={require('../../../image/plus.png')} alt='plus' onClick={() => { this.addQuantity(item, cart) }} />
                         </td>
+                        <td>Rp. {total.toLocaleString("IN")}</td>
                      </tr>
                   )
                }
@@ -139,12 +154,12 @@ class Cart extends Component {
             <Header />
             <div className='container mb-5' style={{ marginTop: 88 }}>
                <Row style={{ opacity: '0.9' }}>
-                  <Col sm="8">
+                  <Col sm="9">
                      <Card className='mb-3'>
                         <CardTitle className='display-4 m-1 p-1 text-uppercase text-center'>Cart</CardTitle>
                      </Card>
                      <Card>
-                        <table class="table table-borderless mt-3">
+                        <table class="table table-borderless text-center mt-3">
                            <thead>
                               <tr>
                                  <th scope="col">Image</th>
@@ -152,7 +167,6 @@ class Cart extends Component {
                                  <th scope="col">Price</th>
                                  <th scope="col">Quantity</th>
                                  <th scope="col">Total</th>
-                                 <th scope="col">Action</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -162,14 +176,14 @@ class Cart extends Component {
                         </table>
                      </Card>
                   </Col>
-                  <Col sm="4">
+                  <Col sm="3">
                      <Card body>
                         <CardTitle className='h2 border-bottom m-1 p-1 text-uppercase'>Total</CardTitle>
                         <div className='justify-content-between row m-1 p-1'>
                            <CardText>Sub-total</CardText>
-                           <CardText>IDR {this.renderTotal()}</CardText>
+                           <CardText>IDR {this.onTotal()}</CardText>
                         </div>
-                        <Link to='/'>
+                        <Link to='/checkout'>
                            <Button className='btn btn-success w-100'>
                               Checkout
                            </Button>

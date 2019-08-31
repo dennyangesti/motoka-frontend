@@ -145,33 +145,33 @@ class ManageProduct extends Component {
    }
 
    onFilterItem = () => {
-      const name = this.name.value
+      const nameInput = this.nameInput.value
       const brandInput = this.brandInput.value
       const max = parseInt(this.max.value)
       const min = parseInt(this.min.value)
       console.log(this.brandInput.value)
-      console.log(this.name.value)
+      console.log(this.nameInput.value)
 
-      let searchingProduct = this.state.searchProduct.filter(item => {
+      let searchingProducts = this.state.searchProduct.filter(item => {
          if (isNaN(min) && isNaN(max)) { // Search by Name
             return (
-               item.product_name.toLowerCase().includes(name.toLowerCase())
+               item.product_name.toLowerCase().includes(nameInput.toLowerCase())
             )
          } else if (isNaN(min)) { // Name and Max
             return (
-               item.product_name.toLowerCase().includes(name.toLowerCase())
+               item.product_name.toLowerCase().includes(nameInput.toLowerCase())
                &&
                item.price <= max
             )
          } else if (isNaN(max)) { // Name and Max
             return (
-               item.product_name.toLowerCase().includes(name.toLowerCase())
+               item.product_name.toLowerCase().includes(nameInput.toLowerCase())
                &&
                item.price >= min
             )
          } else if (item.price <= max && item.price >= min) {
             return (
-               item.product_name.toLowerCase().includes(name.toLowerCase())
+               item.product_name.toLowerCase().includes(nameInput.toLowerCase())
                &&
                (item.price <= max && item.price >= min)
             )
@@ -186,10 +186,10 @@ class ManageProduct extends Component {
          }
       })
 
-      if (searchingProduct) {
-         this.setState({ productState: searchingProduct, filter: true })
+      if (searchingProducts[0]) {
+         this.setState({ productState: searchingProducts, filter: true })
       }
-      if (searchingBrand) {
+      if (searchingBrand[0]) {
          this.setState({ brandState: searchingBrand, filter: true })
       }
 
@@ -316,7 +316,7 @@ class ManageProduct extends Component {
                      <input className="form-control" ref={input => { this.editDescription = input }} type="text" defaultValue={item.description} />
                   </td>
                   <td>
-                     <input className="form-control" ref={input => { this.editPrice = input }} type="text" defaultValue={item.price.toLocaleString('IN')} />
+                     <input className="form-control" ref={input => { this.editPrice = input }} type="text" defaultValue={item.price} />
                   </td>
                   <td>
                      <input className="form-control" ref={input => { this.editStock = input }} type="text" defaultValue={item.stock} />
@@ -338,7 +338,7 @@ class ManageProduct extends Component {
    render() {
       const search = require('../../../image/search.png')
 
-      if (this.props.admin.username === '') {
+      if (this.props.admin.id === '') {
          return <Redirect to='/admin' />
          // return <h1>Loading</h1>
       } else {
@@ -382,7 +382,7 @@ class ManageProduct extends Component {
                                        <Form inline onInput={enter => this.onEnter(enter)}>
                                           {/* <FormGroup className="m-0 p-0"> */}
                                           <Label for='product' className='mr-2'>Product Name: </Label>
-                                          <input id='product' className='form-control' placeholder="Search Product by Name" ref={input => { this.name = input }} />
+                                          <input id='product' className='form-control' placeholder="Search Product by Name" ref={input => { this.nameInput = input }} />
                                           <InputGroupAddon addonType="append"><Button onClick={() => this.onFilterItem()} color="danger"><img src={search} alt=''></img></Button></InputGroupAddon>
                                           {/* </FormGroup> */}
                                        </Form>
@@ -460,7 +460,7 @@ class ManageProduct extends Component {
                                     <Form inline onInput={enter => this.onEnter(enter)}>
                                        {/* <FormGroup className="m-0 p-0"> */}
                                        <Label for='product' className='mr-2'>Product Name: </Label>
-                                       <input id='product' className='form-control' placeholder="Search Product by Name" ref={input => { this.name = input }} />
+                                       <input id='product' className='form-control' placeholder="Search Product by Name" ref={input => { this.nameInput = input }} />
                                        <InputGroupAddon addonType="append"><Button onClick={() => this.onFilterItem()} color="danger"><img src={search} alt=''></img></Button></InputGroupAddon>
                                        {/* </FormGroup> */}
                                     </Form>
