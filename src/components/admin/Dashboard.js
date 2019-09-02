@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Card, CardText, CardBody, Button } from 'reactstrap';
+import { Card, CardText, CardBody, CardGroup, CardTitle } from 'reactstrap';
 
 import ManageOrder from './manage/ManageOrder'
 import HeaderAdmin from './HeaderAdmin'
@@ -23,42 +23,40 @@ class Dashboard extends Component {
 
     renderlistInput = () => {
         return (
-            <div className="col-md-10">
-                <div className='container'>
+            <div>
+                <CardGroup className='my-5'>
                     <Card>
                         <CardBody>
-                            <CardText>
-                                <div>Order Pending</div>
-                                <ManageOrder status={'Transaction Pending'} />
-                            </CardText>
+                            <CardTitle className='bg-warning text-center h3'>Transaction Pending</CardTitle>
+                            <ManageOrder status={'Transaction Pending'} />
                         </CardBody>
                     </Card>
+                </CardGroup>
+                <CardGroup className='my-5'>
                     <Card>
                         <CardBody>
-                            <CardText>
-                                Order Paid
-                                <ManageOrder status={'Transaction Paid'} />
-                            </CardText>
+                            <CardTitle className='bg-primary text-center h3'>Transaction Paid</CardTitle>
+                            <ManageOrder status={'Transaction Paid'} />
                         </CardBody>
                     </Card>
+                </CardGroup>
+                <CardGroup className='my-5'>
                     <Card>
                         <CardBody>
-                            <CardText>
-                                Order Finish
-                                <ManageOrder status={'Transaction Completed'} />
-                            </CardText>
+                            <CardTitle className='bg-success text-center h3'>Transaction Completed</CardTitle>
+                            <ManageOrder status={'Transaction Completed'} />
                         </CardBody>
                     </Card>
+                </CardGroup>
+                <CardGroup className='my-5'>
                     <Card>
                         <CardBody>
-                            <CardText>
-                                Order Decline
-                                <ManageOrder status={'Transaksi Declined'} />
-                            </CardText>
+                            <CardTitle className='bg-danger text-center h3'>Transaction Declined</CardTitle>
+                            <ManageOrder status={'Transaction Declined'} />
                         </CardBody>
                     </Card>
-                </div >
-            </div >
+                </CardGroup>
+            </div>
         )
     }
 
@@ -69,10 +67,8 @@ class Dashboard extends Component {
                 return (
                     <div>
                         <HeaderAdmin />
-                        <div class="container-fluid" style={{ marginTop: 80 }}>
-                            <div class="row">
-                                {this.renderlistInput()}
-                            </div>
+                        <div className='container' style={{ marginTop: 80 }}>
+                            {this.renderlistInput()}
                         </div>
                     </div>
                 )

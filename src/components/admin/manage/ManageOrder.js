@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { Button, Card, CardHeader, CardBody, CardFooter } from 'reactstrap';
-import HeaderAdmin from '../HeaderAdmin';
+import { Button, Table } from 'reactstrap'
+
 
 class ManageOrder extends Component {
    state = {
@@ -40,44 +40,32 @@ class ManageOrder extends Component {
       return this.state.checkout.map(val => {
          if (val.order_status === status) {
             return (
-               <div className='container mt-4' style={{ borderStyle: "solid", borderColor: 'AntiqueWhite' }}>
-                  <div className='row mt-2'>
-                     <div className='col-4 border-right'>
-                        <h3>User ID : {val.user_id}</h3>
-                     </div>
-                     <div className='col-6'>
-                        <div>Username :</div>
-                     </div>
-                  </div>
-                  <hr></hr>
-                  <div className='row mt-2'>
-                     <div className='col-3 border-right'>
-                        <p className='align-self-center'>{val.created_at}</p>
-                     </div>
-                     <div className='col-3 border-left'>
-                        <div>Total Price : IDR. {val.total_price.toLocaleString('IN')}</div>
-                     </div>
-                  </div>
-                  <hr></hr>
-                  <div className='row mb-3'>
-                     <div className='col-5 borders'>
-                        <img className='ml-2' style={{ width: 200, height: 200 }} alt='' src={`http://localhost:2019/checkout/invoice/${val.invoice}`} />
-                     </div>
-                     <div className='col-2 border-left'>
-                        <Button className='btn btn-success m-2' onClick={() => this.onConfirm(val.id)}>Confirm</Button>
-                        <Button className='btn btn-danger m-2' onClick={() => this.onDecline(val.id)}>Cancel</Button>
-                     </div>
-                     <Card>
-                        <CardHeader>ORDER RECEIPT</CardHeader>
-                        <CardBody>
-                           <img className='ml-2' style={{ width: 400, height: 400 }} alt='' src={`http://localhost:2019/checkout/invoice/${val.invoice}`} />
-                        </CardBody>
-                        <CardFooter>
-                           <Button color="success" onClick={() => this.onConfirm(val.id)}>Confirm</Button>
-                           <Button color="secondary" onClick={() => { this.onDecline(val.id) }}>Cancel</Button>
-                        </CardFooter>
-                     </Card>
-                  </div>
+               <div className='container mt-4'>
+                  <Table bordered>
+                     <thead>
+                        <tr>
+                           <th>User ID</th>
+                           <th>Created at</th>
+                           <th>Total Price</th>
+                           <th>Order Receipt</th>
+                           <th>Action</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <th scope="row">{val.user_id}</th>
+                           <td>{val.created_at}</td>
+                           <td>IDR {val.total_price.toLocaleString('IN')}</td>
+                           <td>
+                              <img className='ml-2' style={{ width: 50 }} alt='' src={`http://localhost:2019/checkout/invoice/${val.invoice}`} />
+                           </td>
+                           <td>
+                              <Button className='btn btn-success mx-3' onClick={() => this.onConfirm(val.id)}>Confirm</Button>
+                              <Button className='btn btn-danger' onClick={() => this.onDecline(val.id)}>Decline</Button>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </Table>
                </div>
             )
          }
@@ -87,10 +75,7 @@ class ManageOrder extends Component {
    render() {
       return (
          <div>
-            <HeaderAdmin />
-            <div style={{ marginTop: 80 }}>
-               {this.renderOrder(this.props.status)}
-            </div>
+            {this.renderOrder(this.props.status)}
          </div>
       )
    }

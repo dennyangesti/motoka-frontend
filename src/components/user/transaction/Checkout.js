@@ -204,7 +204,7 @@ class Checkout extends Component {
             <div className='container mb-5' style={{ marginTop: 88 }}>
                <div className="w-50 mx-auto" style={{ opacity: 0.9 }}>
                   <Card body className='mb-3'>
-                     <CardText className='text-center display-4'>Cart</CardText>
+                     <CardText className='text-center display-4'>Checkout</CardText>
                   </Card>
                   <Card body>
                      <CardBody>

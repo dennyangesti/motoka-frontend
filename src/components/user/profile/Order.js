@@ -64,6 +64,8 @@ class Order extends Component {
    onUpload = (id) => {
       const formData = new FormData()
       const invoice = this.image.files[0]
+      console.log(this.image.files)
+      console.log(invoice)
 
       formData.append('invoice', invoice)
       formData.append('id', id)
@@ -90,7 +92,7 @@ class Order extends Component {
                         <Card>
                            <CardBody>
                               <CardText>
-                                 <img className='justify-content-center' style={{ width: 100, height: 75 }} src={`http://localhost:2019/products/avatar/${item.image}`} />
+                                 <img className='justify-content-center' style={{ width: 400 }} src={`http://localhost:2019/products/avatar/${item.image}`} />
                               </CardText>
                            </CardBody>
                         </Card>
@@ -119,7 +121,7 @@ class Order extends Component {
       return this.state.checkout.map(val => {
          if (val.order_status === 'Transaction Pending') {
             return (
-               <div className='container mt-4 text-dark'>
+               <div className='container mt-4 text-center'>
                   <CardGroup >
                      <Card inverse color='warning'>
                         <CardBody>
@@ -136,20 +138,24 @@ class Order extends Component {
                      {this.renderCart(val.id)}
                      <Card>
                         <CardBody className='text-center'>
-                           <CardTitle className='display-4'>Transfer Receipt: </CardTitle>
-                           <CardText>Transfer receipt not found!</CardText>
-
-                           <input type='file' ref={input => { this.image = input }}></input>
-
-                           <button class="btn btn-primary btn-sm mx-auto d-flex" onClick={() => { this.onUpload(val.id) }}>Upload Receipt</button>
+                           <div className='row mb-3'>
+                              <div className='col'>
+                                 <center>
+                                    <h2 className='display-4'>Please complete previous transcation</h2>
+                                 </center>
+                                 <a href={`/confirmation/${this.props.user.id}`}>
+                                    <button class="btn btn-danger btn-sm mx-auto d-flex">Checkout</button>
+                                 </a>
+                              </div>
+                           </div>
                         </CardBody>
                      </Card>
                   </CardGroup>
-               </div>
+               </div >
             )
          } else if (val.order_status === 'Transaction Paid') {
             return (
-               <div className='container mt-4'>
+               <div className='container mt-4 text-center'>
                   <CardGroup >
                      <Card inverse color='primary'>
                         <CardBody>
@@ -166,16 +172,16 @@ class Order extends Component {
                      {this.renderCart(val.id)}
                      <Card>
                         <CardBody>
-                           <CardTitle className='display-4'>Transfer Receipt: </CardTitle>
-                           <img className='ml-2' style={{ width: 400 }} alt='' src={`http://localhost:2019/checkout/invoice/${val.invoice}`} />
+                           <CardTitle className='display-4 text-center'>Transfer Receipt: </CardTitle>
+                           <img className='ml-2 mt-3' style={{ width: 100 }} alt='' src={`http://localhost:2019/checkout/invoice/${val.invoice}`} />
                         </CardBody>
                      </Card>
                   </CardGroup>
                </div>
             )
-         } else if (val.order_status === 'Payment Completed') {
+         } else if (val.order_status === 'Transaction Completed') {
             return (
-               <div className='container mt-4'>
+               <div className='container mt-4 text-center'>
                   <CardGroup >
                      <Card inverse color='success'>
                         <CardBody>
@@ -186,22 +192,22 @@ class Order extends Component {
                            <div className='border-top'>
                               <CardText className='mt-3'>Total Price:</CardText>
                            </div>
-                           <CardText className='display-4'>IDR. {val.total_price.toLocaleString('IN')}</CardText>
+                           <CardText className='display-4 text-center'>IDR. {val.total_price.toLocaleString('IN')}</CardText>
                         </CardBody>
                      </Card>
                      {this.renderCart(val.id)}
                      <Card>
                         <CardBody>
-                           <CardTitle>Transfer Receipt: </CardTitle>
-                           <img className='ml-2' style={{ width: 200, height: 200 }} alt='' src={`http://localhost:2019/checkout/invoice/${val.invoice}`} />
+                           <CardTitle className='display-4'>Transfer Receipt: </CardTitle>
+                           <img className='ml-2 mt-3' style={{ width: 100 }} alt='' src={`http://localhost:2019/checkout/invoice/${val.invoice}`} />
                         </CardBody>
                      </Card>
                   </CardGroup>
                </div>
             )
-         } else if (val.order_status === 'Payment Canceled') {
+         } else if (val.order_status === 'Transaction Declined') {
             return (
-               <div className='container mt-4'>
+               <div className='container mt-4 text-center'>
                   <CardGroup >
                      <Card inverse color='danger'>
                         <CardBody>
@@ -212,15 +218,17 @@ class Order extends Component {
                            <div className='border-top'>
                               <CardText className='mt-3'>Total Price:</CardText>
                            </div>
-                           <CardText className='display-4'>IDR. {val.total_price.toLocaleString('IN')}</CardText>
+                           <CardText className='display-4 text-center'>IDR. {val.total_price.toLocaleString('IN')}</CardText>
                         </CardBody>
                      </Card>
                      {this.renderCart(val.id)}
                      <Card>
                         <CardBody>
-                           <CardTitle>Transfer Receipt: </CardTitle>
+                           <CardTitle className='display-4'>Transfer Receipt: </CardTitle>
+
                            <input type='file' ref={input => { this.image = input }}></input>
-                           <button class="btn btn-primary btn-lg btn-block" onClick={() => { this.onUpload(val.id) }}>Upload Receipt</button>
+
+                           <button class="btn btn-primary btn-sm mx-auto d-flex" onClick={() => { this.onUpload(val.id) }}>Upload Receipt</button>
                         </CardBody>
                      </Card>
                   </CardGroup>
@@ -235,7 +243,6 @@ class Order extends Component {
          <div>
             <Header />
             <div className='container mb-5' style={{ marginTop: 80 }}>
-               <hr></hr>
                <h1><center>Order History</center></h1>
                <div className='row'>
                   <span className='col-1 text-center align-self-center'>Sort By : </span>
@@ -248,8 +255,8 @@ class Order extends Component {
                   </div>
                   <div className='col-5'>
                      <select className='form-control' ref={input => this.sequence = input}>
-                        <option>ASC</option>
-                        <option>DESC</option>
+                        <option>Asc</option>
+                        <option>Desc</option>
                      </select>
                   </div>
                   <button className='btn btn-success' onClick={() => this.onSort()}>Filter</button>
