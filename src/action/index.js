@@ -160,89 +160,63 @@ export const keepLogin = (objUser) => {
 // --------------ADMIN-----------------
 // --------------START-----------------
 // ------------------------------------
+
+// LOGIN ADMIN START
 export const loginAdmin = (username, password) => {
    return (dispatch) => {
-      axios.post(`/login/admin`,
+      axios.post(
+         'http://localhost:2019/login/admin',
          {
-            username, password
+            username,
+            password
+
          }
       ).then(res => {
-         if (typeof (res.data) === 'string') {
-            Swal.fire({
-               type: `error`,
-               title: `Error 404`,
-               text: res.data
-            })
+         if (typeof (res.data) == 'string') {
+            // Print errornya
+            alert('Error: ' + res.data)
          } else {
-            const { id, username, email } = res.data
 
-            dispatch({
-               type: `ADMIN_LOGIN_SUCCESS`,
-               payload: {
-                  id, username, email
+            const { id, username } = res.data
+            // console.log(res.data[0].username + " berhasil login");
+            dispatch(
+               {
+                  type: 'LOGIN_ADMIN', // untuk menentukan reducer mana yang akan memproses
+                  payload: {
+                     id, username
+                  } // berisi data yang akan di taruh di state
                }
-            })
-            cookie.set('motokaAdmin', { id, username, password, email }, { path: `/admin ` })
-
-            Swal.fire({
-               position: `center`,
-               type: `success`,
-               title: `Login Success!`,
-               showConfirmButton: false,
-               timer: 1500
-            })
+            )
+            // Save data kedalam cookie
+            cookie.set('Admin', { id, username })
          }
       })
    }
 }
-// ADMIN LOGIN END
+// LOGIN ADMIN END
 
-// ADMIN KEEP LOGIN START
-export const keepLoginAdmin = (objAdmin) => {
+// KEEP ADMIN START
+export const keepAdmin = (objUser) => {
    return {
-      type: "ADMIN_LOGIN_SUCCESS",
+      type: "LOGIN_ADMIN",
       payload: {
-         id: objAdmin.id,
-         username: objAdmin.username,
+         id: objUser.id,
+         username: objUser.username
       }
    }
 }
-// ADMIN KEEP LOGIN END
+// KEEP ADMIN END
 
-// ADMIN LOGOUT START
+// KEEP ADMIN START
 export const logoutAdmin = () => {
-   cookie.remove('motokaAdmin')
-   return { type: 'ADMIN_LOGOUT_SUCCESS' }
+   cookie.remove('Admin')
+   return {
+      type: "LOGOUT_ADMIN"
+   }
 }
-// ADMIN LOGOUT END
+// KEEP ADMIN END
 
 // ------------------------------------
 // --------------ADMIN-----------------
 // ---------------END------------------
 // ------------------------------------
-
-// ADD TO CART START
-export const addCart = (user_id, first_name, last_name, product_id, quantity, total_price) => {
-   axios.patch(`/cart`,
-      {
-         user_id, first_name, last_name, product_id, quantity, total_price
-      }
-   ).then(res => {
-      if (typeof (res.data) == `string`) {
-         Swal.fire({
-            type: `error`,
-            title: `Error 404`,
-            text: res.data
-         })
-      } else {
-         Swal.fire({
-            position: `center`,
-            type: `success`,
-            title: `Product has been added to cart`,
-            showConfirmButton: false,
-            timer: 1500
-         })
-      }
-   })
-}
-// ADD TO CART END

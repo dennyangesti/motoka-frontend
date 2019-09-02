@@ -339,7 +339,7 @@ class ManageProduct extends Component {
       const search = require('../../../image/search.png')
 
       if (this.props.admin.id === '') {
-         return <Redirect to='/admin' />
+         return <Redirect to='/dashboard' />
          // return <h1>Loading</h1>
       } else {
          if (this.state.filter) {
@@ -500,11 +500,11 @@ class ManageProduct extends Component {
 }
 
 
-const mapStatetoProps = state => {
+const mapStateToProps = state => {
    return {
       admin: state.admin_auth
    }
 }
 
 
-export default connect(mapStatetoProps)(ManageProduct)
+export default connect(mapStateToProps)(ManageProduct)

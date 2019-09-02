@@ -77,7 +77,7 @@ class LoginAdmin extends Component {
       }
 
       // Arahkan user yang telah login ke home
-      return <Redirect to='/admin' />
+      return <Redirect to='/dashboard' />
 
    }
 }

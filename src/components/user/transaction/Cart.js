@@ -183,7 +183,7 @@ class Cart extends Component {
                            <CardText>Sub-total</CardText>
                            <CardText>IDR {this.onTotal()}</CardText>
                         </div>
-                        <Link to='/checkout'>
+                        <Link to={`/checkout/${this.props.user.id}`}>
                            <Button className='btn btn-success w-100'>
                               Checkout
                            </Button>

@@ -65,14 +65,14 @@ const userReducer = (state = initUser, action) => {
 
 const adminReducer = (state = initAdmin, action) => {
    switch (action.type) {
-      case "ADMIN_LOGIN_SUCCESS":
+      case "LOGIN_ADMIN":
          return {
             ...state,
             id: action.payload.id,
             username: action.payload.username,
          }
 
-      case "ADMIN_LOGOUT_SUCCESS":
+      case "LOGOUT_ADMIN":
          return {
             ...state,
             id: '',

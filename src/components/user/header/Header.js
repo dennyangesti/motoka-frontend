@@ -110,13 +110,16 @@ class Header extends Component {
                                  Welcome, <span className='text-danger'>{this.props.user.username}</span>
                               </DropdownToggle>
                               <DropdownMenu>
-                                 <DropdownItem tag='a' href='/profile' className="nav-item btn-outline-dark text-capitalize">
-                                    Profile
-                           </DropdownItem>
+                                 <DropdownItem className="nav-item btn-outline-dark text-capitalize">
+                                    <Link to='/profile'>Profile</Link>
+                                 </DropdownItem>
+                                 <DropdownItem className="nav-item btn-outline-dark text-capitalize">
+                                    <Link to={`/order/${this.props.user.id}`}>Order</Link>
+                                 </DropdownItem>
                                  <DropdownItem className="nav-item btn-dark"
                                     onClick={this.onButtonClick}>
                                     Logout
-                           </DropdownItem>
+                                 </DropdownItem>
                               </DropdownMenu>
                            </UncontrolledDropdown>
                         </li>

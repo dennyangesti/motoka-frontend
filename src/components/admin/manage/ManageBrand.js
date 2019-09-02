@@ -142,7 +142,7 @@ class ManageBrand extends Component {
                         </td>
                         <td>
                            <Button color="danger" onClick={() => { this.setState({ edit: item.id }) }}>Edit</Button>
-                           <button className='btn btn-warning m-1' onClick={() => { this.onDeleteItem(item) }}>Delete</button>
+                           <button className='btn btn-warning m-1' onClick={() => { this.deleteBrand(item) }}>Delete</button>
                         </td>
                      </tr>
                   )
@@ -156,7 +156,7 @@ class ManageBrand extends Component {
                      </td>
                      <td>
                         <Button color="danger" onClick={() => { this.setState({ edit: item.id }) }}>Edit</Button>
-                        <button className='btn btn-warning m-1' onClick={() => { this.onDeleteItem(item) }}>Delete</button>
+                        <button className='btn btn-warning m-1' onClick={() => { this.deleteBrand(item) }}>Delete</button>
                      </td>
                   </tr>
                )
@@ -195,7 +195,7 @@ class ManageBrand extends Component {
    render() {
 
       if (this.props.admin.username === '') {
-         return <Redirect to='/admin' />
+         return <Redirect to='/dashboard' />
          // return <h1>Loading</h1>
       } else {
          return (
@@ -238,11 +238,11 @@ class ManageBrand extends Component {
    }
 }
 
-const mapStatetoProps = state => {
+const mapStateToProps = state => {
    return {
       admin: state.admin_auth
    }
 }
 
 
-export default connect(mapStatetoProps)(ManageBrand)
+export default connect(mapStateToProps)(ManageBrand)
