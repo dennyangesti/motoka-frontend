@@ -50,7 +50,6 @@ class HeaderAdmin extends Component {
                         <Link to='/dashboard' type='a'><p className="nav-link text-danger">Dash<span className='text-white font-weight-lighter'>board</span></p></Link>
                         <Link to='/manageproduct' type='a'><p className="nav-link text-danger">Manage<span className='text-white font-weight-lighter'>Product</span></p></Link>
                         <Link to='/managebrand' type='a'><p className="nav-link text-danger">Manage<span className='text-white font-weight-lighter'>Brand</span></p></Link>
-                        <Link to='/manageorder' type='a'><p className="nav-link text-danger">Manage<span className='text-white font-weight-lighter'>Order</span></p></Link>
                      </div>
                   </div>
                   <UncontrolledDropdown setActiveFromChild className='mt-1'>

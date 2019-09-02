@@ -76,10 +76,9 @@ class Dashboard extends Component {
             return (
                 <div>
                     <HeaderAdmin />
-                    <div class="container-fluid" style={{ marginTop: 80 }}>
-                        <div class="row">
-                            {this.renderlistInput()}
-                        </div>
+                    <div class="container" style={{ marginTop: 80 }}>
+                        <h1 className='text-center display-3'>ORDER HISTORY</h1>
+                        {this.renderlistInput()}
                     </div>
                 </div>
             )

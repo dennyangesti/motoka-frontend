@@ -56,9 +56,6 @@ class Header extends Component {
                            <li className="nav-item">
                               <Link to='/product'><p className="nav-link text-white">Product</p></Link>
                            </li>
-                           <li className="nav-item">
-                              <Link to='/brand'><p className="nav-link text-white">Event</p></Link>
-                           </li>
                            <Link to='/about'><li className="nav-item">
                               <p className="nav-link text-white">About</p>
                            </li></Link>
@@ -88,9 +85,6 @@ class Header extends Component {
                         </li>
                         <li className="nav-item">
                            <Link to='/product'><p className="nav-link text-white">Product</p></Link>
-                        </li>
-                        <li className="nav-item">
-                           <Link to='/brand'><p className="nav-link text-white">Event</p></Link>
                         </li>
                         <Link to='/about'><li className="nav-item">
                            <p className="nav-link text-white">About</p>

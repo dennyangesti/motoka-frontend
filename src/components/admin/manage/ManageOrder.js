@@ -40,7 +40,7 @@ class ManageOrder extends Component {
       return this.state.checkout.map(val => {
          if (val.order_status === status) {
             return (
-               <div className='container mt-4'>
+               <div className='mt-4'>
                   <Table bordered>
                      <thead>
                         <tr>
